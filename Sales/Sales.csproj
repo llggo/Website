@@ -168,7 +168,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Manage\Controllers\MenuController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
+    <Compile Include="Areas\Manage\Models\MenuModel.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -177,6 +179,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Areas\User\Models\AccountViewModels.cs" />
+    <Compile Include="Migrations\201709140522575_db.cs" />
+    <Compile Include="Migrations\201709140522575_db.Designer.cs">
+      <DependentUpon>201709140522575_db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Areas\User\Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,9 +195,25 @@
     <Content Include="Content\custom.css" />
     <Content Include="Content\footers\footer-v4.css" />
     <Content Include="Content\headers\header-v5.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-manage.css" />
+    <Content Include="Plugins\bootstrap\css\bootstrap-manage.min.css" />
+    <Content Include="Content\areas\manage\demo.css" />
+    <Content Include="Content\areas\manage\invoice.css" />
+    <Content Include="Content\areas\manage\lockscreen.css" />
+    <Content Include="Content\areas\manage\lockscreen.min.css" />
+    <Content Include="Content\areas\manage\smartadmin-production-plugins.css" />
+    <Content Include="Content\areas\manage\smartadmin-production-plugins.min.css" />
+    <Content Include="Content\areas\manage\smartadmin-production.css" />
+    <Content Include="Content\areas\manage\smartadmin-production.min.css" />
+    <Content Include="Content\areas\manage\smartadmin-rtl.css" />
+    <Content Include="Content\areas\manage\smartadmin-rtl.min.css" />
+    <Content Include="Content\areas\manage\smartadmin-skins.css" />
+    <Content Include="Content\areas\manage\smartadmin-skins.min.css" />
+    <Content Include="Content\areas\manage\your_style.css" />
     <Content Include="Content\pages\log-reg-v3.css" />
     <Content Include="Content\plugins\style-switcher.css" />
     <Content Include="Content\shop.style.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\theme-colors\aqua.css" />
     <Content Include="Content\theme-colors\blue.css" />
     <Content Include="Content\theme-colors\brown.css" />
@@ -204,7 +227,6 @@
     <Content Include="Content\theme-colors\purple.css" />
     <Content Include="Content\theme-colors\red.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Image\1.jpg" />
     <Content Include="Image\2.jpg" />
@@ -754,21 +776,51 @@
     <Content Include="Plugins\sky-forms-pro\skyforms\icons\FontAwesome.otf" />
     <Content Include="Areas\Manage\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Aside.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Header.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Manage\Views\Menu\Create.cshtml" />
+    <Content Include="Areas\Manage\Views\Menu\Delete.cshtml" />
+    <Content Include="Areas\Manage\Views\Menu\Details.cshtml" />
+    <Content Include="Areas\Manage\Views\Menu\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Table.cshtml" />
     <None Include="Properties\PublishProfiles\Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\forms\page_contact_form.js" />
     <Content Include="Scripts\forms\page_login.js" />
     <Content Include="Scripts\forms\page_registration.js" />
     <Content Include="Scripts\forms\product-quantity.js" />
     <Content Include="Scripts\forms\review.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\areas\manage\app.config.seed.js" />
+    <Content Include="Scripts\areas\manage\app.seed.js" />
+    <Content Include="Scripts\areas\manage\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\areas\manage\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\areas\manage\datatable-responsive\datatables.responsive.js" />
+    <Content Include="Scripts\areas\manage\datatable-responsive\datatables.responsive.min.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.colReorder.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.colVis.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.colVis.min.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.tableTools.js" />
+    <Content Include="Scripts\areas\manage\datatables\dataTables.tableTools.min.js" />
+    <Content Include="Scripts\areas\manage\datatables\jquery.dataTables.js" />
+    <Content Include="Scripts\areas\manage\datatables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\areas\manage\datatables\swf\copy_csv_xls.swf" />
+    <Content Include="Scripts\areas\manage\datatables\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\areas\manage\smartwidgets\jarvis.widget.js" />
+    <Content Include="Scripts\areas\manage\smartwidgets\jarvis.widget.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\plugins\circles-master.js" />
     <Content Include="Scripts\plugins\master-slider.js" />
@@ -823,25 +875,18 @@
     <Content Include="Views\Shared\_TopBar.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Addons.cshtml" />
+    <Content Include="Scripts\areas\manage\libs\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Manage\Controllers\" />
-    <Folder Include="Areas\Manage\Models\" />
-    <Folder Include="Areas\Manage\Views\Shared\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709140522575_db.resx">
+      <DependentUpon>201709140522575_db.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

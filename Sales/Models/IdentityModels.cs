@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Sales.Areas.Manage.Models;
 
 namespace Sales.Models
 {
@@ -39,5 +40,7 @@ namespace Sales.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
+
+        public DbSet<MenuModel> Menu { get; set; }
     }
 }
