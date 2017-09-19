@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Company.Areas.Manage.Models.CrudArticle>
+@using Microsoft.AspNet.Identity.Owin
+@using Company.Models
+@using System.Threading
+@{
+    ViewBag.Title = "Article List";
+    Layout = "~/Areas/Manage/Views/Shared/_Table.cshtml";
+}
+
+@{
+    var UserManage = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    string language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+}
+
+<thead>
+    <tr>
+        <th data-hide="phone">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            #
+        </th>
+        <th data-class="expand">
+            <i class="fa fa-fw fa-id-card text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.ArticleLanguage[language].Name)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Article.CategoryId)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Article.Enable)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Article.LastEditTime)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Article.LastEditUser)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Article.CreateTime)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Article.CreateUser)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-terminal text-muted hidden-md hidden-sm hidden-xs"></i>
+            Action
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Article.Id
+            </td>
+            <td>
+                @foreach (var ml in item.ArticleLanguage)
+                {
+                    if (ml.Key.Equals(language))
+                    {
+                        @Html.DisplayFor(modelItem => ml.Value.Name)
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Article.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Article.Enable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Article.LastEditTime)
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @UserManage.FindByIdAsync(item.Article.LastEditUser).Result.UserName;
+                    }
+                    catch
+                    {
+                        <label>Null</label>;
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Article.CreateTime)
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @UserManage.FindByIdAsync(item.Article.CreateUser).Result.UserName;
+                    }
+                    catch
+                    {
+                        <label>Null</label>;
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Article.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Article.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Article.Id })
+            </td>
+        </tr>
+                    }
+</tbody>

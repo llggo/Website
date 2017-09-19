@@ -1,0 +1,72 @@
+﻿@model PagedList.IPagedList<Company.Models.ArticleView>
+@using PagedList.Mvc
+@using Company.Extends.Library
+@using System.Threading
+@using Microsoft.AspNet.Identity.Owin
+@using Company.Models
+@using Company.Extends.Language
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Blog.cshtml";
+
+    var language = Thread.CurrentThread.CurrentCulture.DisplayName;
+    var UserManage = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+    var data = new Data();
+}
+
+<div id="blog-list" class="blog-list section col-md-8 col-sm-8 col-xs-12">
+
+    @foreach (var m in Model)
+    {
+
+        <article class="post">
+            <div class="post-thumb">
+                <img class="img-responsive" src="@m.ArticleLanguage.Image" alt="" />
+            </div><!--//post-thumb-->
+            <div class="content">
+                <h3 class="post-title"><a href="@Url.RouteUrl("Details", new {post_name = data.ToUrlFriendly(m.ArticleLanguage.Name),  id = @m.Article.Id})">@m.ArticleLanguage.Name</a></h3>
+                <div class="meta">
+                    <ul class="meta-list list-inline">
+                        <li class="post-time post_date date updated">@m.Article.CreateTime</li>
+                        <li class="post-author">
+                            by
+                            <a href="#">
+                                @{
+                                    try
+                                    {
+                                        @UserManage.FindByIdAsync(@m.Article.CreateUser).Result.UserName;
+                                    }
+                                    catch
+                                    {
+                                        <label>@Resource.website_null</label>;
+                                    }
+                                }
+                            </a>
+                        </li>
+                        @*<li class="post-comments-link">
+                                <a href="blog-single.html#comment-area"><i class="fa fa-comments"></i>8 Comments</a>
+                            </li>*@
+                    </ul><!--//meta-list-->
+                </div><!--meta-->
+                <div class="post-entry">
+                    <p>@m.ArticleLanguage.Describe</p>
+                    <a class="read-more" href="@Url.RouteUrl("Details", new {post_name = data.ToUrlFriendly(m.ArticleLanguage.Name),  id = @m.Article.Id})">@Resource.website_button_view_more <i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        </article><!--//post-->
+    }
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { categoryId = ViewBag.categoryId, page }))
+
+    @*<ul class="pagination">
+            <li class="disabled"><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>*@<!--//pagination-->
+</div><!--//blog-list-->

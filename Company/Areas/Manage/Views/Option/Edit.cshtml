@@ -1,0 +1,520 @@
+﻿@model Company.Areas.Manage.Models.CrudOption
+
+    @using Company.Extends.Language
+    @using Company.Extends.Library
+    @using System.Threading
+
+    @{
+        ViewBag.Title = "Create";
+        Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+        var currentLanguage = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+        var language = new Language();
+        var LanguageList = language.LanguageList(currentLanguage);
+
+        List<SelectListItem> item = new List<SelectListItem>();
+        item.Add(new SelectListItem { Text = "True", Value = "True" });
+        item.Add(new SelectListItem { Text = "False", Value = "False" });
+    }
+
+<legend>
+    Edit Option
+</legend>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+@Html.HiddenFor(m => m.Option.Id)
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Option.ClientEnable)
+            @Html.DropDownListFor(m => m.Option.ClientEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Option.ClientEnable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Option.OurProductsEnable)
+            @Html.DropDownListFor(m => m.Option.OurProductsEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Option.OurProductsEnable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Option.IntroEnable)
+            @Html.DropDownListFor(m => m.Option.IntroEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Option.IntroEnable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Option.LiveChatEnable)
+            @Html.DropDownListFor(m => m.Option.LiveChatEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Option.LiveChatEnable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Option.SignUpEnable)
+            @Html.DropDownListFor(m => m.Option.SignUpEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Option.SignUpEnable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<!-- Widget ID (each widget will need unique ID)-->
+<div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+    <!-- widget options:
+    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+    data-widget-colorbutton="false"
+    data-widget-editbutton="false"
+    data-widget-togglebutton="false"
+    data-widget-deletebutton="false"
+    data-widget-fullscreenbutton="false"
+    data-widget-custombutton="false"
+    data-widget-collapsed="true"
+    data-widget-sortable="false"
+    -->
+    <header>
+        <ul class="nav nav-tabs pull-left in">
+            @{
+                foreach (var l in LanguageList)
+                {
+                    <li class="@((l.CodeCheck == l.CodeObject) ? "active" : "")">
+                        <a href="#@l.Id" data-toggle="tab">@l.Name</a>
+                    </li>
+                }
+            }
+        </ul>
+    </header>
+    <!-- widget div-->
+    <div>
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+        </div>
+        <!-- end widget edit box -->
+        <!-- widget content -->
+        <div class="widget-body">
+            <div class="tab-content">
+                @{
+                    foreach (var l in LanguageList)
+                    {
+                        <div class="tab-pane @((l.CodeCheck == l.CodeObject)? "active" : "")" id="@l.Id">
+                            <article class="col-sm-12 col-md-12 col-lg-12">
+                                <!-- Widget ID (each widget will need unique ID)-->
+                                <div class="jarviswidget well transparent" id="wid-id-9" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+                                    <!-- widget options:
+                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                        data-widget-colorbutton="false"
+                                        data-widget-editbutton="false"
+                                        data-widget-togglebutton="false"
+                                        data-widget-deletebutton="false"
+                                        data-widget-fullscreenbutton="false"
+                                        data-widget-custombutton="false"
+                                        data-widget-collapsed="true"
+                                        data-widget-sortable="false"
+                                        -->
+                                    <!-- widget div-->
+                                    <div>
+                                        <!-- widget content -->
+                                        <div class="widget-body">
+                                            <div class="panel-group smart-accordion-default" id="option-@l.Id">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#option-@l.Id" href="#general-@l.Id"> 
+                                                            <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i> 
+                                                            General
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="general-@l.Id" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].LogoPath)
+                                                                    <div class="input-group">
+                                                                        @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].LogoPath, new {@id = "text-image-logo-"+@l.CodeCheck, @class = "form-control" })
+                                                                        <span class="input-group-btn">
+                                                                            <button id="upload-image-logo-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
+                                                                        </span>
+                                                                    </div><!-- /input-group -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].LogoBottomPath)
+                                                                    <div class="input-group">
+                                                                        @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].LogoBottomPath, new { @id = "text-image-logo2-" + @l.CodeCheck, @class = "form-control" })
+                                                                        <span class="input-group-btn">
+                                                                            <button id="upload-image-logo2-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
+                                                                        </span>
+                                                                    </div><!-- /input-group -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].LogoProducts)
+                                                                    <div class="input-group">
+                                                                        @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].LogoProducts, new { @id = "text-image-logo3-" + @l.CodeCheck, @class = "form-control" })
+                                                                        <span class="input-group-btn">
+                                                                            <button id="upload-image-logo3-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
+                                                                        </span>
+                                                                    </div><!-- /input-group -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].WhyUs, new { @class = ""})
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].WhyUs, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].OurProductsDes, new { @class = "" })
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].OurProductsDes, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].IntroTitle)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].IntroTitle, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].IntroDescribe)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].IntroDescribe, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].SignUpTitle)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].SignUpTitle, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].SignUpDescribe)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].SignUpDescribe, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].AboutUs)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].AboutUs, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].AboutUsTarget)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].AboutUsTarget, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Phone)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Phone, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Phone2)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Phone2, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Email)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Email, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Email2)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Email2, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Address1)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Address1, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Address2)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Address2, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#option-@l.Id" href="#slider-@l.Id" class="collapsed"> 
+                                                            <i class="fa fa-lg fa-angle-down pull-right"></i> 
+                                                            <i class="fa fa-lg fa-angle-up pull-right"></i>
+                                                             Slider Block Option
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="slider-@l.Id" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label>Image Slider</label>
+                                                                    <a href="@Url.Action("Create", "Slider", new { area = "Manage" })" class="fa fa-plus"></a>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="col-md-1">#</th>
+                                                                                    <th class="col-md-4">Name</th>
+                                                                                    <th class="col-md-5">Info</th>
+                                                                                    <th class="col-md-2">Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @{
+                                                                                    foreach (var s in Model.CrudSlider)
+                                                                                    {
+                                                                                        var slider = s.SliderLanguage[currentLanguage];
+                                                                                        <tr>
+                                                                                            <td>@s.Slider.Id</td>
+                                                                                            <td>@slider.Name</td>
+                                                                                            <td>@slider.Infomation</td>
+                                                                                            <td>
+                                                                                                @Html.ActionLink("Edit", "Edit", "Slider", new { @id = s.Slider.Id, area = "Manage" }, new { }) |
+                                                                                                @Html.ActionLink("Delete", "Delete", "Slider", new { @id = s.Slider.Id, area = "Manage" }, new { })
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#option-@l.Id" href="#client-@l.Id" class="collapsed">
+                                                                <i class="fa fa-lg fa-angle-down pull-right"></i>
+                                                                <i class="fa fa-lg fa-angle-up pull-right"></i>
+                                                                Client Block Option
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="client-@l.Id" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label>Image Client</label>
+                                                                    <a href="@Url.Action("Create", "Client", new { area = "Manage" })" class="fa fa-plus"></a>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="col-md-1">#</th>
+                                                                                    <th class="col-md-4">Name</th>
+                                                                                    <th class="col-md-5">Info</th>
+                                                                                    <th class="col-md-2">Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @{
+                                                                                    foreach (var s in Model.CrudClient)
+                                                                                    {
+                                                                                        var slider = s.ClientLanguage[currentLanguage];
+                                                                                        <tr>
+                                                                                            <td>@s.Client.Id</td>
+                                                                                            <td>@slider.Name</td>
+                                                                                            <td>@slider.Infomation</td>
+                                                                                            <td>
+                                                                                                @Html.ActionLink("Edit", "Edit", "Client", new { @id = s.Client.Id, area = "Manage" }, new { }) |
+                                                                                                @Html.ActionLink("Delete", "Delete", "Client", new { @id = s.Client.Id, area = "Manage" }, new { })
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*<div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#option-@l.Id" href="#video-@l.Id" class="collapsed"> 
+                                                            <i class="fa fa-lg fa-angle-down pull-right"></i> 
+                                                            <i class="fa fa-lg fa-angle-up pull-right"></i> 
+                                                            Video Block Option 
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="video-@l.Id" class="panel-video-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].VideoTitle)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].VideoTitle, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].VideoDescribe)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].VideoDescribe, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].VideoImageBackground)
+                                                                    <div class="input-group">
+                                                                        @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].VideoImageBackground, new {@id="text-image-video-"+@l.CodeCheck, @class = "form-control" })
+                                                                        <span class="input-group-btn">
+                                                                            <button id="upload-image-video-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Video)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Video, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+
+                                        </div>
+                                        <!-- end widget content -->
+                                    </div>
+                                    <!-- end widget div -->
+                                </div>
+                                <!-- end widget -->
+                            </article>
+                        </div>
+                        @Html.HiddenFor(model => model.OptionLanguage[l.CodeCheck].Id, new { @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.OptionLanguage[l.CodeCheck].OptionId, new { @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.OptionLanguage[l.CodeCheck].LanguageId, new { @Value = l.Id, @readonly = "readonly" })
+                    }
+                }
+                
+            </div>
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget div -->
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <input class="btn btn-default btn-success" type="submit" value="Save">
+    </div>
+</div>
+<!-- end widget -->
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Extends/Content/Plugin/ckfinder/ckfinder.js"></script>
+    <script>
+        var finder = new CKFinder();
+        $(document).ready(function () {
+
+            setCollapse();
+            @foreach(var ll in LanguageList)
+            {
+                @:file("#upload-image-logo-@ll.CodeCheck ", "text-image-logo-@ll.CodeCheck");
+                @:file("#upload-image-logo2-@ll.CodeCheck ", "text-image-logo2-@ll.CodeCheck");
+                @:file("#upload-image-logo3-@ll.CodeCheck ","text-image-logo3-@ll.CodeCheck");
+                @:file("#upload-image-video-@ll.CodeCheck", "text-image-video-@ll.CodeCheck");
+
+                <text>
+                    $('#video-@ll.Id').on('show.bs.collapse', function () {
+                        sls('video-@ll.Id');
+                    }).on('hidden.bs.collapse', function () {
+                        sls('');
+                    });
+                    $('#general-@ll.Id').on('show.bs.collapse', function () {
+                        sls('general-@ll.Id');
+
+                    }).on('hidden.bs.collapse', function () {
+                        sls('');
+                    });;
+                    $('#slider-@ll.Id').on('show.bs.collapse', function () {
+                        sls('slider-@ll.Id');
+                    }).on('hidden.bs.collapse', function () {
+                        sls('');
+                    });;
+                    $('#client-@ll.Id').on('show.bs.collapse', function () {
+                        sls('client-@ll.Id');
+                    }).on('hidden.bs.collapse', function () {
+                        sls('');
+                    });;
+                </text>
+            }
+        });
+
+        function file(buttonId, txtboxId) {
+            $(buttonId).click(function () {
+                finder.selectActionFunction = function (fileUrl) {
+                    document.getElementById(txtboxId).value = fileUrl;
+                }
+                finder.popup();
+            });
+        }
+
+        function sls(id) {
+            if (typeof (Storage) !== "undefined") {
+                // Gán dữ liệu
+                sessionStorage.idCollapse = id;
+                // Lấy dữ liệu
+                var domain = sessionStorage.domain; // freetuts.net
+            } else {
+                document.write('Trình duyệt của bạn không hỗ trợ local storage');
+            }
+        }
+
+        function gls() {
+            if (typeof (Storage) !== "undefined") {
+                // Lấy dữ liệu
+                return domain = sessionStorage.idCollapse; // freetuts.net
+            } else {
+                document.write('Trình duyệt của bạn không hỗ trợ local storage');
+            }
+        }
+
+        function setCollapse() {
+            var id = gls();
+            $('#' + id).collapse({
+                toggle: true
+            });
+        }
+</script>
+}
+    

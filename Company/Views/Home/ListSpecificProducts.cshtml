@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Company.Models.SpecificProductsView>
+
+@{
+    ViewBag.Title = "ListSpecificProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model) {
+    <a href="@Url.Action("SpecificProducts", "Home", routeValues: new { id= item.SProduct.Id})"> @item.SProductLanguage.Name</a>
+}
+

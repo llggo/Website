@@ -1,0 +1,108 @@
+﻿@model Company.Areas.Manage.Models.CrudLanguage
+
+@using Company.Extends.Language
+@using Company.Extends.Library
+@using System.Threading
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+    var currentLanguage = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+    var language = new Language();
+    var LanguageList = language.LanguageList(currentLanguage);
+
+    List<SelectListItem> item = new List<SelectListItem>();
+    item.Add(new SelectListItem { Text = "True", Value = "True" });
+    item.Add(new SelectListItem { Text = "False", Value = "False" });
+
+    Model.LanguageLanguage = new Dictionary<string, Company.Areas.Manage.Models.LanguageLanguage>() { };
+
+    foreach (var ls in LanguageList)
+    {
+        Model.LanguageLanguage.Add(ls.CodeCheck, new Company.Areas.Manage.Models.LanguageLanguage() { });
+    }
+}
+
+<legend>
+    Create Language
+</legend>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row margin-bottom-5">
+        <div class="col-md-12">
+            <div class="widget-body">
+                <ul id="tab-language" class="nav nav-tabs bordered">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <li class="@((l.CodeCheck == l.CodeObject)? "active" : "")">
+                                <a href="#@l.Id" data-toggle="tab">@l.Name</a>
+                            </li>
+                        }
+                    }
+                    @*<li class="pull-right">
+                            <a href="javascript:void(0);">
+                                <div class="sparkline txt-color-pinkDark text-align-right" data-sparkline-height="18px" data-sparkline-width="90px" data-sparkline-barwidth="7">
+                                    5,10,6,7,4,3
+                                </div>
+                            </a>
+                        </li>*@
+                </ul>
+                <div id="tab-content-language" class="tab-content padding-10">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <div class="tab-pane fade in @((l.CodeCheck == l.CodeObject)? "active" : "")" id="@l.Id">
+
+                                @foreach (var m in Model.LanguageLanguage)
+                                {
+                                    if (m.Key.Equals(l.CodeCheck))
+                                    {
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.LanguageLanguage[m.Key].Name)
+                                            @Html.TextBoxFor(model => model.LanguageLanguage[m.Key].Name, new { @class = "form-control" })
+                                            @Html.HiddenFor(model => model.LanguageLanguage[m.Key].LanguageObjectId, new { @Value = l.Id, @readonly = "readonly" })
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Language.Code)
+                @Html.TextBoxFor(m => m.Language.Code, new { @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Language.Code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Language.Info)
+                @Html.TextBoxFor(m => m.Language.Info, new { @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Language.Info, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-default" href="@Url.Action("Index")" role="button">Back</a>
+            <input class="btn btn-default btn-success" type="submit" value="Submit">
+        </div>
+    </div>
+
+
+                        }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

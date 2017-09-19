@@ -1,0 +1,143 @@
+﻿@model Company.Areas.Manage.Models.CrudMenu
+
+@using Company.Extends.Language
+@using Company.Extends.Library
+@using System.Threading
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+    var currentLanguage = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+    var language = new Language();
+    var LanguageList = language.LanguageList(currentLanguage);
+
+    List<SelectListItem> item = new List<SelectListItem>();
+    item.Add(new SelectListItem { Text = "True", Value = "True" });
+    item.Add(new SelectListItem { Text = "False", Value = "False" });
+}
+
+<legend>
+    Edit Menu
+</legend>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row margin-bottom-5">
+        <div class="col-md-12">
+            <div class="widget-body">
+                <ul id="tab-language" class="nav nav-tabs bordered">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <li class="@((l.CodeCheck == l.CodeObject)? "active" : "")">
+                                <a href="#@l.Id" data-toggle="tab">@l.Name</a>
+                            </li>
+                        }
+                    }
+                    @*<li class="pull-right">
+                            <a href="javascript:void(0);">
+                                <div class="sparkline txt-color-pinkDark text-align-right" data-sparkline-height="18px" data-sparkline-width="90px" data-sparkline-barwidth="7">
+                                    5,10,6,7,4,3
+                                </div>
+                            </a>
+                        </li>*@
+                </ul>
+                <div id="tab-content-language" class="tab-content padding-10">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <div class="tab-pane fade in @((l.CodeCheck == l.CodeObject)? "active" : "")" id="@l.Id">
+
+                                @foreach (var m in Model.MenuLanguage)
+                                {
+                                    if (m.Key.Equals(l.CodeCheck))
+                                    {
+                                        <div class="form-group">
+                                            @Html.HiddenFor(model => model.MenuLanguage[m.Key].Id)
+                                            @Html.HiddenFor(model => model.MenuLanguage[m.Key].MenuId)
+                                            @Html.LabelFor(model => model.MenuLanguage[m.Key].Name)
+                                            @Html.TextBoxFor(model => model.MenuLanguage[m.Key].Name, new { @class = "form-control" })
+                                            @Html.HiddenFor(model => model.MenuLanguage[m.Key].LanguageId, new { @Value = l.Id, @readonly = "readonly" })
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.Menu.Id)
+    @Html.HiddenFor(m => m.Menu.CreateTime)
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.ParentId, htmlAttributes: new { @for = "ParentID" })
+                @Html.DropDownListFor(m => m.Menu.ParentId, new SelectList(ViewBag.ParentList, "Value", "Text"), new { @id = "ParentID", @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Menu.ParentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MenuLanguage.Name, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.MenuLanguage.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MenuLanguage.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.isDropdown)
+                @Html.DropDownListFor(m => m.Menu.isDropdown, new SelectList(ViewBag.isEnable, "Value", "Text"), new { @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Menu.isDropdown, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.Visible)
+                @Html.DropDownListFor(m => m.Menu.Visible, new SelectList(ViewBag.isEnable, "Value", "Text"), new { @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Menu.Visible, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.isActive)
+                @Html.DropDownListFor(m => m.Menu.isActive, new SelectList(ViewBag.isEnable, "Value", "Text"), new { @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Menu.isActive, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.Order, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Menu.Order, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Menu.Order, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Menu.Target, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Menu.Target, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Menu.Target, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-default" href="@Url.Action("Index")" role="button">Back</a>
+            <input class="btn btn-default btn-success" type="submit" value="Submit">
+        </div>
+    </div>
+
+
+                        }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

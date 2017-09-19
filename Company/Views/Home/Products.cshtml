@@ -1,0 +1,68 @@
+﻿@model Company.Models.ProductsView
+@using Company.Extends.Language
+@using Company.Models
+@using System.Threading
+@using Company.Extends.Library
+@{
+    ViewBag.Title = "Our Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+}
+
+
+
+<div class="container-fluid">
+    <div class="row" style="">
+        <img class="img-responsive" src="@Model.Logo" style="width:100%;" />
+    </div>
+</div>
+
+@foreach (var p in Model.Products)
+{
+    <div class="container" style="margin-top:30px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center text-uppercase" style="color:#0c829d;">@p.ProducLanguage.Name</h3>
+                <p class="text-center">@p.ProducLanguage.Describle</p>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px; padding:0 40px;">
+            @{ 
+                int col = 0;
+                switch (p.ProductImage.Count())
+                {
+                    case 2:
+                        col = 6;
+                        break;
+                    case 3:
+                        col = 4;
+                        break;
+                    default:
+                        col = 12;
+                        break;
+                }
+            }
+            @foreach (var i in p.ProductImage)
+            {
+                <div class="col-md-@col center-block">
+                    <img class="img-responsive" src="@i.Path" style="width:100%; padding:0 20px;" />
+                    <p class="text-center text-uppercase" style="margin-top:20px;">@i.Name</p>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+
+
+
+<div class="container">
+    <a href="@Url.Action("Contact","Home")"><h4 class="text-center" style="color:#0c829d; margin:30px auto;">@Resource.website_solution_contact</h4></a>
+</div>
+
+@section Scripts {
+
+                }

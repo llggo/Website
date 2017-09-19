@@ -1,0 +1,158 @@
+﻿@model Company.Areas.Manage.Models.CrudArticle
+
+@using Company.Extends.Language
+@using Company.Extends.Library
+@using System.Threading
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+    var currentLanguage = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+    var language = new Language();
+    var LanguageList = language.LanguageList(currentLanguage);
+
+    List<SelectListItem> item = new List<SelectListItem>();
+    item.Add(new SelectListItem { Text = "True", Value = "True" });
+    item.Add(new SelectListItem { Text = "False", Value = "False" });
+
+    Model.ArticleLanguage = new Dictionary<string, Company.Areas.Manage.Models.ArticleLanguage>() { };
+
+    foreach (var ls in LanguageList)
+    {
+        Model.ArticleLanguage.Add(ls.CodeCheck, new Company.Areas.Manage.Models.ArticleLanguage() { });
+    }
+
+}
+
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Article.CategoryId, htmlAttributes: new { @for = "ParentID" })
+                @Html.DropDownListFor(m => m.Article.CategoryId, new SelectList(ViewBag.CategoryList, "Value", "Text"), new { @id = "ParentID", @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Article.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Article.Visible)
+                @Html.DropDownListFor(m => m.Article.Visible, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+                @Html.ValidationMessageFor(model => model.Article.Visible, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row margin-bottom-5 margin-top-5">
+        <div class="col-md-12">
+            <div class="widget-body">
+                <ul id="tab-language" class="nav nav-tabs bordered">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <li class="@((l.CodeCheck == l.CodeObject)? "active" : "")">
+                                <a href="#@l.Id" data-toggle="tab">@l.Name</a>
+                            </li>
+                        }
+                    }
+                    @*<li class="pull-right">
+                            <a href="javascript:void(0);">
+                                <div class="sparkline txt-color-pinkDark text-align-right" data-sparkline-height="18px" data-sparkline-width="90px" data-sparkline-barwidth="7">
+                                    5,10,6,7,4,3
+                                </div>
+                            </a>
+                        </li>*@
+                </ul>
+                <div id="tab-content-language" class="tab-content padding-10">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <div class="tab-pane fade in @((l.CodeCheck == l.CodeObject)? "active" : "")" id="@l.Id">
+
+                                @foreach (var m in Model.ArticleLanguage)
+                                {
+                                    if (m.Key.Equals(l.CodeCheck))
+                                    {
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.ArticleLanguage[m.Key].Name)
+                                                    @Html.TextBoxFor(model => model.ArticleLanguage[m.Key].Name, new { @class = "form-control" })
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.ArticleLanguage[m.Key].Image)
+                                                    <div class="input-group">
+                                                        @Html.TextBoxFor(model => model.ArticleLanguage[m.Key].Image, new {@id = "text-image-"+l.CodeCheck, @class = "form-control" })
+                                                        <span class="input-group-btn">
+                                                            <button id="upload-image-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
+                                                        </span>
+                                                    </div><!-- /input-group -->
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   @Html.LabelFor(model => model.ArticleLanguage[m.Key].Describe)
+                                                   @Html.TextBoxFor(model => model.ArticleLanguage[m.Key].Describe, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="row margin-top-5">
+                                                <div class="col-md-12">
+                                                    @Html.LabelFor(model => model.ArticleLanguage[m.Key].Content)
+                                                    @Html.TextAreaFor(model => model.ArticleLanguage[m.Key].Content, new { @id = "content-" + m.Key, @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            @Html.HiddenFor(model => model.ArticleLanguage[m.Key].LanguageId, new { @Value = l.Id, @readonly = "readonly" })
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a id="back_btn" class="btn btn-default" href="@Url.Action("Index")" role="button">Back</a>
+            <input class="btn btn-default btn-success" type="submit" value="Submit">
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+
+    <script src="~/Extends/Content/Plugin/ckeditor_4.6.2/ckeditor.js"></script>
+    <script src="~/Extends/Content/Plugin/ckfinder/ckfinder.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var finder = new CKFinder();
+
+            function file(buttonId, txtboxId) {
+                $(buttonId).click(function () {
+                    finder.selectActionFunction = function (fileUrl) {
+                        document.getElementById(txtboxId).value = fileUrl;
+                    }
+                    finder.popup();
+                });
+            }
+
+            @foreach(var ll in LanguageList)
+            {
+                @Html.Raw("var editor"+ll.Id+" = CKEDITOR.replace(\"content-" + ll.CodeCheck + "\",{ language:'"+ll.CodeObject+"'}); \n");
+                @Html.Raw("file(\"#upload-image-" +ll.CodeCheck +"\","+"\"text-image-"+ll.CodeCheck+"\"); \n");
+            }
+        });
+    </script>
+}

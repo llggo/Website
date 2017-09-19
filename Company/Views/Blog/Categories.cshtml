@@ -1,0 +1,11 @@
+﻿@model List<Company.Models.CategoryView>
+@using System.Threading
+@{
+    var language = Thread.CurrentThread.CurrentCulture.DisplayName;
+
+    foreach (var m in Model)
+    {
+        <li><a href="@Url.Action("Index", "Blog", new { @categoryId = m.Category.Id })">@m.CategoryLanguage.Name</a></li>
+    }
+}
+

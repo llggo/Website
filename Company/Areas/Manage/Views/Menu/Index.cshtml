@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Company.Areas.Manage.Models.CrudMenu>
+
+@using Microsoft.AspNet.Identity.Owin
+@using Company.Models
+@using System.Threading
+@{
+    ViewBag.Title = "Menu List";
+    Layout = "~/Areas/Manage/Views/Shared/_Table.cshtml";
+}
+
+@{
+    var UserManage = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    string language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+}
+
+<thead>
+    <tr>
+        <th data-hide="phone">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            #
+        </th>
+        <th data-hide="phone">
+            <i class="fa fa-fw fa-id-badge text-muted hidden-md hidden-sm hidden-xs"></i>
+            ParentId
+        </th>
+        <th data-class="expand">
+            <i class="fa fa-fw fa-id-card text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.MenuLanguage[language].Name)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.Order)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.isDropdown)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.Visible)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.isActive)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.CreateTime)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.CreateUser)
+        </th>
+        @*<th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-link text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Menu.Target)
+        </th>*@
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-terminal text-muted hidden-md hidden-sm hidden-xs"></i>
+            Action
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Menu.Id
+            </td>
+            <td>
+                @{
+                    if (item.Menu.ParentId == 0 || item.Menu.ParentId == null)
+                    {
+                        <label class="label label-danger">Is Parent</label>
+                    }
+                    else
+                    {
+                        <label class="label label-primary">
+                            @Html.Action("GetParent", "Menu", new { @ParentId = item.Menu.ParentId })
+                        </label>
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var ml in item.MenuLanguage)
+                {
+                    if (ml.Key.Equals(language))
+                    {
+                        @Html.DisplayFor(modelItem => ml.Value.Name)
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.isDropdown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.Visible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.isActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.CreateTime)
+            </td>
+            <td>
+                @{ 
+                    try
+                    {
+                        @UserManage.FindByIdAsync(item.Menu.CreateUser).Result.UserName;
+                    }
+                    catch
+                    {
+                        <label>Null</label>;
+                    }
+                }
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Menu.Target)
+            </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Menu.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Menu.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Menu.Id })
+            </td>
+        </tr>
+    }
+</tbody>
+

@@ -1,0 +1,80 @@
+﻿<!-- #NAVIGATION -->
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS/SASS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    <div class="login-info">
+        <span>
+            <!-- User image size is adjusted inside CSS, it should stay as is -->
+
+            <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+                <img src="~/Images/avatars/sunny.png" alt="me" class="online" />
+                <span>
+                    @User.Identity.Name
+                </span>
+                <i class="fa fa-angle-down"></i>
+            </a>
+
+        </span>
+    </div>
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!--
+        NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li class="">
+                <a href="@Url.Action("Index","Home", new { area = "Manage"})" title="blank_"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Home</span></a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Edit","Option", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Option</span></a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index","Menu", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-list"></i> <span class="menu-item-parent">Menu</span></a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index","Category", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-file-text"></i> <span class="menu-item-parent">Category</span></a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index","Article", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Article</span></a>
+            </li>
+
+            <li class="">
+                <a href="@Url.Action("Index","Product", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Products</span></a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("Index","ProductImage", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Image of Products</span></a>
+            </li>
+
+            <li class="">
+                <a href="@Url.Action("Index","SpecificProducts", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Specific Products</span></a>
+            </li>
+
+            <li class="">
+                <a href="@Url.Action("Index","UsersAdmin", new { area = "User"})" title="menu"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">User</span></a>
+            </li>
+
+            <li class="">
+                <a href="@Url.Action("Index","Language", new { area = "Manage"})" title="menu"><i class="fa fa-lg fa-fw fa-language"></i> <span class="menu-item-parent">Language</span></a>
+            </li>
+
+            <li class="">
+                <a href="@Url.Action("Index","Home", new { area = ""})" title="menu"><i class="fa fa-lg fa-fw fa-arrow-circle-left"></i> <span class="menu-item-parent">Exit</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+
+</aside>
+<!-- END NAVIGATION -->

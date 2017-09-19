@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Company.Models.Customer>
+@using Microsoft.AspNet.Identity.Owin
+@using Company.Models
+@using System.Threading
+@{
+    ViewBag.Title = "Article List";
+    Layout = "~/Areas/Manage/Views/Shared/_Table.cshtml";
+}
+
+@{
+    var UserManage = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+    string language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+}
+
+<thead>
+    <tr>
+        <th data-class="expand">
+            <i class="fa fa-fw fa-id-card text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th data-class="expand">
+            <i class="fa fa-fw fa-id-card text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-list-ol text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th data-hide="phone,tablet">
+            <i class="fa fa-fw fa-yelp text-muted hidden-md hidden-sm hidden-xs"></i>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+        </tr>
+     }
+</tbody>

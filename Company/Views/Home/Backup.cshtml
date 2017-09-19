@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Backup";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Backup</h2>
+
+Language
+
+@foreach(var l in ViewBag.Language)
+{
+    <p>@l.Id - @l.Code </p>
+}
+
+@foreach (var l in ViewBag.LanguageLanguage)
+{
+    <p>@l.Id - @l.LanguageObjectId - @l.LanguageCheckId - @l.Name </p>
+}
+

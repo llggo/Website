@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @using Company.Extends.Language
+    
+    @using System.Threading;
+    @{
+        var language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+        var returnUrl = Request.RawUrl;
+    }
+
+    <title>@ViewBag.Title - @Resource.website_title</title>
+    @Styles.Render("~/manage/plugin")
+    @Styles.Render("~/manage/template/smart-admin")
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <!-- #APP SCREEN / ICONS -->
+    <!-- Specifying a Webpage Icon for Web Clip
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="~/Images/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Images/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Images/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Images/splash/touch-icon-ipad-retina.png">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="~/Images/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="~/Images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="~/Images/splash/iphone.png" media="screen and (max-device-width: 320px)">
+    <style>
+        /* ======= Configure Style (REMOVE ON YOUR PRODUCTION SITE)  ======= */
+.config-wrapper {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  z-index: 20;
+}
+.config-wrapper-inner {
+  position: relative;
+}
+.config-trigger {
+  display: block;
+  position: absolute;
+  left: -36px;
+  width: 36px;
+  height: 36px;
+  background-color: darkslategray;
+  color: #fff;
+  text-align: center;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.config-trigger:hover {
+  background: #000;
+}
+.config-trigger .fa {
+  font-size: 22px;
+  padding-top: 8px;
+  display: block;
+  color: #fff;
+}
+.config-panel {
+  width: 200px;
+  display: none;
+  background-color:darkslategray;
+  color: #fff;
+  padding: 15px;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.config-panel h5.device-title {
+  margin-bottom: 5px;
+}
+
+
+.config-panel .close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #fff;
+}
+.config-panel .close .fa {
+  color: #fff;
+}
+
+.config-panel a{
+    color:white;
+    display:list-item;
+    list-style: none;
+    padding:5px 0;
+}
+
+.config-panel a:hover{
+    color:gray !important;
+}
+
+
+</style>
+
+</head>
+
+<!--
+
+    TABLE OF CONTENTS.
+
+    Use search to find needed section.
+
+    ===================================================================
+
+    |  01. #CSS Links                |  all CSS links and file paths  |
+    |  02. #FAVICONS                 |  Favicon links and file paths  |
+    |  03. #GOOGLE FONT              |  Google font link              |
+    |  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
+    |  05. #BODY                     |  body tag                      |
+    |  06. #HEADER                   |  header tag                    |
+    |  07. #PROJECTS                 |  project lists                 |
+    |  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
+    |  09. #MOBILE                   |  mobile view dropdown          |
+    |  10. #SEARCH                   |  search field                  |
+    |  11. #NAVIGATION               |  left panel & navigation       |
+    |  12. #MAIN PANEL               |  main panel                    |
+    |  13. #MAIN CONTENT             |  content holder                |
+    |  14. #PAGE FOOTER              |  page footer                   |
+    |  15. #SHORTCUT AREA            |  dropdown shortcuts area       |
+    |  16. #PLUGINS                  |  all scripts and plugins       |
+
+    ===================================================================
+
+    -->
+<!-- #BODY -->
+<!-- Possible Classes
+
+    * 'smart-style-{SKIN#}'
+    * 'smart-rtl'         - Switch theme mode to RTL
+    * 'menu-on-top'       - Switch to top navigation (no DOM change required)
+    * 'no-menu'			  - Hides the menu completely
+    * 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
+    * 'fixed-header'      - Fixes the header
+    * 'fixed-navigation'  - Fixes the main menu
+    * 'fixed-ribbon'      - Fixes breadcrumb
+    * 'fixed-page-footer' - Fixes footer
+    * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
+-->
+<body class="smart-style-2">
+
+    @Html.Partial("~/Areas/Manage/Views/Shared/_Header.cshtml", new ViewDataDictionary { { "returnUrl", returnUrl }, { "language", language } })
+
+    @Html.Partial("~/Areas/Manage/Views/Shared/_Aside.cshtml")
+
+    <!-- #MAIN PANEL -->
+    <div id="main" role="main">
+
+        <!-- RIBBON -->
+        <div id="ribbon">
+
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li>Home</li>
+                <li>Blank</li>
+            </ol>
+            <!-- end breadcrumb -->
+            <!-- You can also add more buttons to the
+            ribbon for further usability
+
+            Example below:
+
+            <span class="ribbon-button-alignment pull-right" style="margin-right:25px">
+                <a href="#" id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa fa-grid"></i> Change Grid</a>
+                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa fa-plus"></i> Add</span>
+                <button id="search" class="btn btn-ribbon" data-title="search"><i class="fa fa-search"></i> <span class="hidden-mobile">Search</span></button>
+            </span> -->
+
+        </div>
+        <!-- END RIBBON -->
+        <!-- #MAIN CONTENT -->
+        <div id="content">
+                @RenderBody()
+            <!-- end col -->
+            <!-- end row -->
+            <!-- END #MAIN CONTENT -->
+        </div>
+        
+    </div>
+    <!-- END #MAIN PANEL -->
+
+    @Html.Partial("~/Areas/Manage/Views/Shared/_Footer.cshtml")
+
+    <!-- #SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+         Note: These tiles are completely responsive, you can add as many as you like -->
+
+    <div id="shortcut">
+        <ul>
+            <li>
+                <a href="index.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END SHORTCUT AREA -->
+    <!--================================================== -->
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
+    <!-- #PLUGINS -->
+
+    <!-- *****CONFIGURE STYLE****** -->
+    <div class="config-wrapper">
+        <div class="config-wrapper-inner">
+            <a id="config-trigger" class="config-trigger" href="#"><i class="fa fa-comments"></i></a>
+            <div id="config-panel" class="config-panel">
+                <h5>Choose Friend</h5>
+                <div class="chat-users top-menu-invisible">
+                <!-- DISPLAY USERS -->
+                <div id="chat-lists" class="display-users">
+                    @*<input class="form-control chat-user-filter" placeholder="Filter" type="text">*@
+                </div>
+                <!-- END DISPLAY USERS -->
+                </div>
+                <a id="config-close" class="close" href="#"><i class="fa fa-times-circle"></i></a>
+            </div><!--//configure-panel-->
+        </div><!--//config-wrapper-inner-->
+    </div><!--//config-wrapper-->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/template/smart-admin")
+    @Scripts.Render("~/bundles/jquery/signalR")
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/bundles/plugin/smart-chat-ui")
+    
+
+    <script>
+        $(document).ready(function () {
+            pageSetUp();
+        });
+
+        /* ======= Style Switcher (REMOVE ON YOUR PRODUCTION SITE) ======= */
+
+        $('#config-trigger').on('click', function (e) {
+            var $panel = $('#config-panel');
+            var panelVisible = $('#config-panel').is(':visible');
+            if (panelVisible) {
+                $panel.hide();
+            } else {
+                $panel.show();
+            }
+            e.preventDefault();
+        });
+
+        $('#config-close').on('click', function (e) {
+            e.preventDefault();
+            $('#config-panel').hide();
+        });
+
+
+        $(window).scroll(function () {
+            var offset = 100;
+            var topVal = $(window).scrollTop() + offset;
+            $(".config-wrapper").offset({ top: topVal });
+        });
+
+        var chatlist = document.getElementById('chat-lists');
+
+        chathub.client.received = function (user, msg) {
+            chatboxManager.messageSentCallback(user.Id, user.UserName, msg);
+        }
+        
+        chathub.client.updateList = function (users) {
+            console.log(users);
+            chatlist.innerHTML = "";
+            for (var i = 0; i < users.length; i++) {
+                chatlist.innerHTML += "<a href=\"#\" class=\"usr\" onclick=\"NewChatBox('" + users[i].Value.Id + "','" + users[i].Value.UserName + "')\">" + users[i].Value.UserName + "</a>";
+            }
+        }
+
+        // Start Hub
+        $.connection.hub.logging = true;
+        $.connection.hub.start().done(function () {
+            console.log("hub start")
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

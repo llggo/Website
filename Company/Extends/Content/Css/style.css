@@ -1,0 +1,15 @@
+/*
+ * Template Name: Unify - Responsive Bootstrap Template
+ * Description: Business, Corporate, Portfolio, E-commerce, Blog and One Page Template.
+ * Version: 1.9.2
+ * Author: @htmlstream
+ * Website: http://htmlstream.com
+*/
+
+/*Import Global Compulsory CSS Files*/
+@import url(blocks.css);
+
+@font-face {
+    font-family: Neutra_2;
+    src: url('../../../fonts/UTM Neutra_2.ttf');
+}

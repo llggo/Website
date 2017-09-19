@@ -1,0 +1,138 @@
+﻿@model Company.Models.SpecificProductsView
+@using Company.Extends.Language
+@using Company.Models
+@using System.Threading
+@using Company.Extends.Library
+@{
+    ViewBag.Title = "SpecificProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+}
+
+
+
+<div class="container-fluid">
+    <div class="row" style="background-color:white;">
+        <img class="img-responsive" src="@Model.SProductLanguage.Image" style="width:100%;"/>
+    </div>
+</div>
+<div class="container" style="margin-top:30px;">
+    <p class="text-center text-justify">@Model.SProductLanguage.Describe</p>
+
+    <div class="row" style="background-color:white; text-align:center; margin-top:50px;">
+        <img class="img-responsive" src="@Model.SProductLanguage.CustomerImage1" style="width:70%; display:block; margin:auto;" />
+    </div>
+
+
+    <h3 class="text-center text-uppercase" style="color:#0c829d; margin-top:50px;">@Model.SProductLanguage.FuncTitle</h3>
+
+    <p class="text-center text-justify">@Model.SProductLanguage.FuncDescribe</p>
+</div>
+
+<div class="container" style="margin-top:40px;">
+        <ul class="row text-justify" style="color:#0c829d;">
+            @{
+                if (Model.SProductLanguage.FuncList1 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList1;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList2 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList2;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList3 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList3;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList4 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList4;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList5 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList5;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList6 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList6;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList7 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList7;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList8 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList8;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList9 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList9;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+                if (Model.SProductLanguage.FuncList10 != null)
+                {
+                    var text = Model.SProductLanguage.FuncList10;
+                    if (!text.Equals(""))
+                    {
+                        <li class="col-md-6"><p style="color:black; padding-right:20px;">@text</p></li>
+                    }
+                }
+            }
+            
+        </ul>
+</div>
+
+@if (@Model.SProductLanguage.CustomerImage2 != "" && @Model.SProductLanguage.CustomerImage2 != null)
+{
+    <div class="container" style="margin-top:20px; margin-bottom:20px;">
+        <div class="row" style="background-color:white; text-align:center;">
+            <img class="img-responsive" src="@Model.SProductLanguage.CustomerImage2" style="height:40%; display:block; margin:auto;" />
+        </div>
+    </div>
+
+}
+
+
+<div style="margin-top:30px;"></div>
+
+
+
+@section Scripts {
+
+}

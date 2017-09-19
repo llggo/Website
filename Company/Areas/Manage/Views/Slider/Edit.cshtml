@@ -1,0 +1,135 @@
+﻿@model Company.Areas.Manage.Models.CrudSlider
+
+@using Company.Extends.Language
+@using Company.Extends.Library
+@using System.Threading
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+    var currentLanguage = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+    var language = new Language();
+    var LanguageList = language.LanguageList(currentLanguage);
+
+    List<SelectListItem> item = new List<SelectListItem>();
+    item.Add(new SelectListItem { Text = "True", Value = "True" });
+    item.Add(new SelectListItem { Text = "False", Value = "False" });
+
+}
+
+<legend>
+    Edit Slider
+</legend>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row margin-bottom-5">
+        <div class="col-md-12">
+            <div class="widget-body">
+                <ul id="tab-language" class="nav nav-tabs bordered">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <li class="@((l.CodeCheck == l.CodeObject)? "active" : "")">
+                                <a href="#@l.Id" data-toggle="tab">@l.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <div id="tab-content-language" class="tab-content padding-10">
+                    @{
+                        foreach (var l in LanguageList)
+                        {
+                            <div class="tab-pane fade in @((l.CodeCheck == l.CodeObject)? "active" : "")" id="@l.Id">
+
+                                @foreach (var m in Model.SliderLanguage)
+                                {
+                                    if (m.Key.Equals(l.CodeCheck))
+                                    {
+                                        @Html.HiddenFor(model => model.SliderLanguage[m.Key].Id)
+                                        @Html.HiddenFor(model => model.SliderLanguage[m.Key].SliderId)
+                                        @Html.HiddenFor(model => model.SliderLanguage[m.Key].LanguageId, new { @Value = l.Id, @readonly = "readonly" })
+
+                                        <div class="row form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.SliderLanguage[m.Key].Name)
+                                                @Html.TextBoxFor(model => model.SliderLanguage[m.Key].Name, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.SliderLanguage[m.Key].Infomation)
+                                                @Html.TextBoxFor(model => model.SliderLanguage[m.Key].Infomation, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-md-12">
+                                                @Html.LabelFor(model => model.SliderLanguage[m.Key].Image)
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(model => model.SliderLanguage[m.Key].Image, new { @id = "text-image-" + l.CodeCheck, @class = "form-control" })
+                                                    <span class="input-group-btn">
+                                                        <button id="upload-image-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
+                                                    </span>
+                                                </div><!-- /input-group -->
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.Slider.Id)
+    @Html.HiddenFor(m => m.Slider.CreateTime)
+    <div class="row form-group">
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Slider.Visible)
+            @Html.DropDownListFor(m => m.Slider.Visible, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Slider.Visible, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Slider.Order, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Slider.Order, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Slider.Order, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-12">
+            <a class="btn btn-default" href="@Url.Action("Edit","Option", new { area = "Manage"})" role="button">Back</a>
+            <input class="btn btn-default btn-success" type="submit" value="Submit">
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Extends/Content/Plugin/ckfinder/ckfinder.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var finder = new CKFinder();
+
+            function file(buttonId, txtboxId) {
+                $(buttonId).click(function () {
+                    finder.selectActionFunction = function (fileUrl) {
+                        document.getElementById(txtboxId).value = fileUrl;
+                    }
+                    finder.popup();
+                });
+            }
+
+            @foreach(var ll in LanguageList)
+            {
+                @Html.Raw("file(\"#upload-image-" +ll.CodeCheck +"\","+"\"text-image-"+ll.CodeCheck+"\"); \n");
+            }
+        });
+    </script>
+}

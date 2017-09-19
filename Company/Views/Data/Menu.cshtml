@@ -1,0 +1,21 @@
+﻿@model System.Collections.Generic.List<Company.Models.MenuView>
+
+
+@foreach (var m in Model)
+{
+    
+    if (m.isDropdown)
+    {
+        <li class="nav-item dropdown @(m.isActive ? "active" : "")">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">@m.Name <i class="fa fa-angle-down"></i></a>
+            <ul class="dropdown-menu">
+                @Html.Action("ChildrenMenu", "Data", new { ParentId = @m.Id })
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li id="@m.Id" class="@(m.isActive ? "active" : "") nav-item"><a href="@m.Target">@m.Name</a></li>
+    }
+
+}

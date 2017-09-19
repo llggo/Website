@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Company.Models.ArticleView>
+@using System.Threading
+@{
+    var language = Thread.CurrentThread.CurrentCulture.DisplayName;
+
+    foreach (var m in Model)
+    {
+        <li><a href="#">@m.ArticleLanguage.Name</a><br /><span class="date">@m.Article.CreateTime</span></li>
+    }
+}
+
+
