@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <text>
+        @using (Html.BeginForm("LogOff", "Account", new { area = "User" }, FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+        <a href="javascript:document.getElementById('logoutForm').submit()" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a>
+    </text>
+}
+else
+{
+    <a href="@Url.Action("Login", "Account", new { area = "User", returnUrl = ViewData["returnUrl"] })" title="Sign In"><i class="fa fa-sign-in"></i></a>
+}

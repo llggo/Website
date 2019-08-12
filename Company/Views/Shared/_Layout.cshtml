@@ -1,93 +1,92 @@
 ﻿<!DOCTYPE html>
-<html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+ <!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Thăng Hoa</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @using Company.Extends.Language
-
-
-    <title>@ViewBag.Title - @Resource.website_title</title>
-    @Styles.Render("~/template/tempo")
-    
-
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,800&amp;subset=cyrillic,latin'>
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/Plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/shop.style.css">
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="~/Content/headers/header-v5.css">
+    <link rel="stylesheet" href="~/Content/footers/footer-v4.css">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/Plugins/animate.css">
+    <link rel="stylesheet" href="~/Plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="~/Plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="~/Plugins/owl-carousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/Plugins/revolution-slider/rs-plugin/css/settings.css">
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="~/Content/theme-colors/green.css" id="style_color">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/Content/custom.css">
 </head>
-<body class="home-page">
+<body class="header-fixed">
     <div class="wrapper">
-        @Html.Partial("_Header")
+        <!--=== Header v5 ===-->
+       @Html.Partial("_Header")
+        <!--=== End Header v5 ===-->
         @RenderBody()
-    </div>
+        <!--=== Footer v4 ===-->
+        @Html.Partial("_Footer")
+        <!--=== End Footer v4 ===-->
+    </div><!--/wrapper-->
+   
+    <!--=== Addons ===-->
+    @Html.Partial("_Addons")
+    <!--=== End Addons ===-->
 
-    <!-- ******FOOTER****** -->
-    @Html.Partial("_Footer")
+    <!-- JS Global Compulsory -->
 
-    @Html.Partial("_Modal")
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 
-    <!-- *****CONFIGURE STYLE****** -->
-    <div class="config-wrapper">
-        <div class="config-wrapper-inner">
-            <a id="config-trigger" class="config-trigger" data-toggle="modal" data-target="#exampleModal" data-whatever="getbootstrap" href="#"><i class="fa fa-comments"></i></a>
-        </div><!--//config-wrapper-inner-->
-    </div><!--//config-wrapper-->
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">@Resource.website_contact_us</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">@Resource.website_fullname:</label>
-                            <input type="text" class="form-control" id="fullname-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="control-label">@Resource.website_message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.website_button_close</button>
-                    <button type="button" id="button-send" class="btn btn-primary" data-dismiss="modal">@Resource.website_button_send_message</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="~/Plugins/jquery/jquery-migrate.min.js"></script>
+    <script src="~/Plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="~/Plugins/back-to-top.js"></script>
+    <script src="~/Plugins/smoothScroll.js"></script>
+    <script src="~/Plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   
+    <!-- JS Customization -->
+    <script src="~/Scripts/custom.js"></script>
+    <!-- JS Page Level -->
     
+    
+    <script src="~/Scripts/Plugins/style-switcher.js"></script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/template/tempo")
-    @Scripts.Render("~/bundles/template/tempo/main")
-    <script src="~/Extends/Content/Template/SmartAdmin/js/app.config.seed.js"></script>
-    @Scripts.Render("~/bundles/jquery/signalR")
-    @Scripts.Render("~/signalr/hubs")
-    @Scripts.Render("~/bundles/plugin/smart-chat-ui")
-    <script>
-        $(document).ready(function () {
-            $('#button-send').click(function () {
-                console.log("send click");
-                var name = document.getElementById('fullname-name').value;
-                var mes = document.getElementById('message-text').value;
-
-                chathub.server.guestSend(name, mes);
-            });
-        });
-
-        chathub.client.received = function (user, msg) {
-            console.log(user.Id + " - " + msg);
-            chatboxManager.messageSentCallback(user.Id, user.UserName, msg);
-        }
-
-
-        $.connection.hub.logging = true;
-        $.connection.hub.start().done(function () {
-            console.log("hub start");
-            
-        });
-
-    </script>
     @RenderSection("scripts", required: false)
+
+    <script>
+	jQuery(document).ready(function() {
+  
+        jQuery('.mCustomScrollbar').mCustomScrollbar({
+            theme: "minimal",
+            scrollInertia: 300,
+            scrollEasing: "linear"
+        });
+       
+		StyleSwitcher.initStyleSwitcher();
+	});
+    </script>
+
+    
+    <!--[if lt IE 9]>
+        <script src="~/Plugins/respond.js"></script>
+        <script src="~/Plugins/html5shiv.js"></script>
+        <script src="Scripts/~/Plugins/placeholder-IE-fixes.js"></script>
+        <![endif]-->
 </body>
 </html>
+

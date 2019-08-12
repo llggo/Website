@@ -46,18 +46,7 @@ namespace Company
                       "~/Extends/Content/Template/SmartAdmin/js/smartwidgets/jarvis.widget.js"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/template/tempo").Include(
-                     "~/Extends/Content/Template/Tempo/assets/plugins/bootstrap/js/bootstrap.js",
-                     "~/Extends/Content/Template/Tempo/assets/plugins/bootstrap-hover-dropdown.min.js",
-                     "~/Extends/Content/Template/Tempo/assets/plugins/jquery-inview/jquery.inview.js",
-                     "~/Extends/Content/Template/Tempo/assets/plugins/isMobile/isMobile.js",
-                     "~/Extends/Content/Template/Tempo/assets/plugins/back-to-top.js",
-                     "~/Extends/Content/Template/Tempo/assets/plugins/jquery-placeholder/jquery.placeholder.js",
-                     "~/Extends/Content/Template/Tempo/assets/js/animations.js",
-                     "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/template/tempo/main").Include(
-                      "~/Extends/Content/Template/Tempo/assets/js/main.js"));
 
             bundles.Add(new StyleBundle("~/manage/plugin").Include(
                       //"~/Extends/Content/Plugin/bootstrap-3.3.7/css/bootstrap.css",
@@ -71,14 +60,6 @@ namespace Company
                       "~/Extends/Content/Template/SmartAdmin/css/smartadmin-rtl.css"
                 ));
 
-
-            bundles.Add(new StyleBundle("~/template/tempo").Include(
-                    "~/Extends/Content/Template/Tempo/assets/plugins/bootstrap/css/bootstrap.css",
-                    "~/Extends/Content/Plugin/font-awesome-4.7.0/css/font-awesome.css",
-                    "~/Extends/Content/Template/Tempo/assets/plugins/pe-icon-7-stroke/css/pe-icon-7-stroke.css",
-                    "~/Extends/Content/Template/Tempo/assets/plugins/animate-css/animate.css",
-                    "~/Extends/Content/Template/Tempo/assets/css/styles.css",
-                    "~/Content/Site.css"));
 
             BundleTable.EnableOptimizations = true;
         }

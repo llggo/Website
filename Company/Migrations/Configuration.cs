@@ -114,9 +114,6 @@
                         new Areas.Manage.Models.Option
                         {
                             Id = 1,
-                            ClientEnable = true,
-                            OurProductsEnable = true,
-                            LiveChatEnable = true,
                             LastEditTime = DateTime.Now,
                         }
                     );
@@ -129,7 +126,6 @@
                         OptionId = 1,
                         LanguageId = 1,
                         LogoPath = "~/Images/logo.png",
-                        WhyUs = "Why us oh!",
                         AboutUs = "About us oh!",
                     },
                     new Areas.Manage.Models.OptionLanguage
@@ -138,64 +134,11 @@
                         OptionId = 1,
                         LanguageId = 2,
                         LogoPath = "~/Images/logo.png",
-                        WhyUs = "beep ****",
                         AboutUs = "Abeep ****",
                     }
                 );
 
-            context.SProduct.AddOrUpdate(
-                    p => p.Id,
-                    new Areas.Manage.Models.SProduct
-                    {
-                        Id = 1,
-                        LastEditTime = DateTime.Now
-                    }
-                );
-
-            context.SProductLanguage.AddOrUpdate(
-                    p => p.Id,
-                    new Areas.Manage.Models.SProductLanguage
-                    {
-                        Id = 1,
-                        SProductId = 1,
-                        LanguageId = 1,
-                        Describe = "Describe"
-                    },
-                    new Areas.Manage.Models.SProductLanguage
-                    {
-                        Id = 2,
-                        SProductId = 1,
-                        LanguageId = 2,
-                        Describe = "Rút gọn"
-                    }
-                );
-
-
-            context.Product.AddOrUpdate(
-                    p => p.Id,
-                    new Areas.Manage.Models.Product
-                    {
-                        Id = 1,
-                        LastEditTime = DateTime.Now
-                    }
-                );
-
-            context.ProductLanguage.AddOrUpdate(
-                    p => p.Id,
-                    new Areas.Manage.Models.ProductLanguage
-                    {
-                        Id = 1,
-                        ProductId = 1,
-                        LanguageId = 1,
-
-                    },
-                    new Areas.Manage.Models.ProductLanguage
-                    {
-                        Id = 2,
-                        ProductId = 1,
-                        LanguageId = 2,
-                    }
-                );
+            
         }
     }
 }

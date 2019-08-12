@@ -4,9 +4,8 @@
 <aside id="left-panel">
 
     <!-- User info -->
-    <div class="login-info">
+    @*<div class="login-info">
         <span>
-            <!-- User image size is adjusted inside CSS, it should stay as is -->
 
             <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
                 <img src="~/Images/avatars/sunny.png" alt="me" class="online" />
@@ -17,7 +16,7 @@
             </a>
 
         </span>
-    </div>
+    </div>*@
     <!-- end user info -->
     <!-- NAVIGATION : This navigation is also responsive
 
@@ -49,16 +48,7 @@
                 <a href="@Url.Action("Index","Article", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Article</span></a>
             </li>
 
-            <li class="">
-                <a href="@Url.Action("Index","Product", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Products</span></a>
-            </li>
-            <li class="">
-                <a href="@Url.Action("Index","ProductImage", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Image of Products</span></a>
-            </li>
-
-            <li class="">
-                <a href="@Url.Action("Index","SpecificProducts", new { area = "Manage" })" title="menu"><i class="fa fa-lg fa-fw fa-sticky-note"></i> <span class="menu-item-parent">Specific Products</span></a>
-            </li>
+           
 
             <li class="">
                 <a href="@Url.Action("Index","UsersAdmin", new { area = "User"})" title="menu"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">User</span></a>

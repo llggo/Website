@@ -1,0 +1,21 @@
+﻿@model System.Collections.Generic.List<Sales.Areas.Manage.Models.MenuModel>
+
+
+@foreach (var m in Model)
+{
+    if (m.IsParent)
+    {
+        <li class="dropdown">
+            <a href="@(String.IsNullOrEmpty(m.Target) ? "#" : m.Target)" class="dropdown-toggle" data-hover="dropdown" data-delay="1000">
+                @m.Name
+            </a>
+            <ul class="dropdown-menu">
+                @Html.Action("ChildrenMenu", "Data", new { ParentId = @m.Id })
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li><a href="@(String.IsNullOrEmpty(m.Target) ? "#" : m.Target)">@m.Name</a></li>
+    }
+}

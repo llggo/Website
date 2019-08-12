@@ -9,12 +9,6 @@ namespace Company.Areas.Manage.Models
     public class Option
     {
         public int Id { get; set; }
-
-        public bool ClientEnable { get; set; }
-        public bool IntroEnable { get; set; }
-        public bool SignUpEnable { get; set; }
-        public bool OurProductsEnable { get; set; }
-        public bool LiveChatEnable { get; set; }
         public string LastEditUser { get; set; }
         public DateTime LastEditTime { get; set; }
     }

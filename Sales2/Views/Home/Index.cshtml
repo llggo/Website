@@ -1,0 +1,230 @@
+﻿@model Sales.Models.HomeView
+
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<!--=== Slider ===-->
+    <div class="tp-banner-container">
+        <div class="tp-banner">
+            <ul>
+                <!-- SLIDE -->
+                @foreach (var s in Model.Slider)
+                {
+                    <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 2">
+                        <!-- MAIN IMAGE -->
+                        <img src="@s.Image" alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <div class="tp-caption revolution-ch3 sft start"
+                             data-x="center"
+                             data-hoffset="0"
+                             data-y="140"
+                             data-speed="1500"
+                             data-start="500"
+                             data-easing="Back.easeInOut"
+                             data-endeasing="Power1.easeIn"
+                             data-endspeed="300">
+                            @s.Name
+                        </div>
+                        <!-- LAYER -->
+                        <div class="tp-caption revolution-ch4 sft"
+                             data-x="center"
+                             data-hoffset="-14"
+                             data-y="210"
+                             data-speed="1400"
+                             data-start="2000"
+                             data-easing="Power4.easeOut"
+                             data-endspeed="300"
+                             data-endeasing="Power1.easeIn"
+                             data-captionhidden="off"
+                             style="z-index: 6">
+                            @s.Content
+                        </div>
+                        <!-- LAYER -->
+                        @if (!String.IsNullOrEmpty(s.Target))
+                        {
+                            <div class="tp-caption sft"
+                                 data-x="center"
+                                 data-hoffset="0"
+                                 data-y="300"
+                                 data-speed="1600"
+                                 data-start="1800"
+                                 data-easing="Power4.easeOut"
+                                 data-endspeed="300"
+                                 data-endeasing="Power1.easeIn"
+                                 data-captionhidden="off"
+                                 style="z-index: 6">
+                                <a href="@s.Target" class="btn-u btn-brd btn-brd-hover btn-u-light">Xem</a>
+                            </div>
+                        }
+                        
+                    </li>
+                }
+                <!-- END SLIDE -->
+            </ul>
+            <div class="tp-bannertimer tp-bottom"></div>
+        </div>
+    </div>
+    <!--=== End Slider ===-->
+    <!--=== Product Content ===-->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="content-md">
+                    @*<div class="heading heading-v1 margin-bottom-20">
+                        <h2>Sản phẩm đặc biệt</h2>
+                    </div>*@
+                    <!--=== Illustration v2 ===-->
+                    @*<div class="illustration-v2 margin-bottom-60">
+                        <div class="customNavigation margin-bottom-25">
+                            <a class="owl-btn prev rounded-x"><i class="fa fa-angle-left"></i></a>
+                            <a class="owl-btn next rounded-x"><i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <ul class="list-inline owl-slider">
+
+                            @foreach (var fp in Model.FeaturedProducts)
+                            {
+                                <li class="item">
+                                    <div class="product-img">
+                                        <a href="/product/details?id=@fp.Product.Id"><img class="full-width img-responsive" src="@((fp.Image != null && fp.Image.Target != "") ? fp.Image.Target : "")" alt=""></a>
+                                        <a class="product-review" href="/product/details?id=@fp.Product.Id">Xem</a>
+                                        <a class="add-to-cart" href="/product/details?id=@fp.Product.Id"><i class="fa fa-shopping-cart"></i>Mua</a>
+                                    </div>
+                                    <div class="product-description product-description-brd">
+                                        <div class="overflow-h margin-bottom-5">
+                                            <div class="pull-left">
+                                                <h4 class="title-price"><a href="shop-ui-inner.html">@fp.Product.Name</a></h4>
+                                            </div>
+                                            <div class="product-price">
+                                                <span class="title-price">@((fp.Product.Price.HasValue) ? "$" + @fp.Product.Price : "")</span>
+                                            </div>
+                                        </div>
+                                        <ul class="list-inline product-ratings">
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li><i class="rating-selected fa fa-star"></i></li>
+                                            <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>*@
+                    <!--=== End Illustration v2 ===-->
+
+                    <div class="heading margin-bottom-40">
+                        <h2>Sản phẩm mới nhất</h2>
+                    </div>
+
+                    <!--=== Illustration v2 ===-->
+                    <div class="row illustration-v2">
+                        @foreach (var lp in Model.LastestProducts)
+                         {
+                            <div class="col-md-4 col-sm-6 md-margin-bottom-30">
+                                <div class="product-img">
+                                    <a href="/product/details?id=@lp.Product.Id">
+                                        <img class="full-width img-responsive"
+                                                src="@((lp.Image != null && lp.Image.Target != "") ? lp.Image.Target : "")" alt="">
+                                    </a>
+                                    <a class="product-review" href="/product/details?id=@lp.Product.Id">Xem</a>
+                                    <a class="add-to-cart" href="/product/details?id=@lp.Product.Id"><i class="fa fa-shopping-cart"></i>Mua</a>
+                                </div>
+                                <div class="product-description product-description-brd">
+                                    <div class="overflow-h margin-bottom-5">
+                                        <div class="pull-left">
+                                            <h4 class="title-price"><a href="/product/details?id=@lp.Product.Id">@lp.Product.Name</a></h4>
+                                        </div>
+                                        <div class="product-price">
+                                            <span class="title-price">@((lp.Product.Price.HasValue) ? "$" + @lp.Product.Price : "")</span>
+                                        </div>
+                                    </div>
+                                    <ul class="list-inline product-ratings">
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li><i class="rating-selected fa fa-star"></i></li>
+                                        <li class="like-icon"><a data-original-title="Add to wishlist" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                          }
+
+                    </div>
+                    <!--=== End Illustration v2 ===-->
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="content-md">
+                    <div class="heading">
+                        <h2>Bài viết mới nhất</h2>
+                    </div>
+
+                    <div class="row illustration-v2">
+                        <div class="list-group">
+                            @foreach (var a in Model.LastestArticle)
+                            {
+                                <a style="border:none;" href="@Url.Action("Details","Article", routeValues: new { area = "", id = a.Id})" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1" style="font-size:20px; text-align:justify; line-height:normal;">@a.Name</h5>
+                                        <small class="text-muted">@a.Create.Time</small>
+                                    </div>
+                                    <p class="mb-1">@a.Describle</p>
+                                    @*<small class="text-muted">@a.Create.User</small>*@
+                                </a>
+                            }
+                        </div>
+                    </div>
+
+                    @*<div class="row margin-bottom-20">
+                        @foreach (var a in Model.LastestArticle)
+                        {
+                            <div class="col-md-12 col-sm-12">
+                                <div class="thumbnails thumbnail-style thumbnail-kenburn">
+                                    <div class="thumbnail-img">
+                                        <div class="overflow-hidden">
+                                            <img class="img-responsive" src="@a.Image" alt="">
+                                        </div>
+                                        <a class="btn-more hover-effect" href="@Url.Action("Details","Article", routeValues: new { area = "", id = a.Id})">Xem</a>
+                                    </div>
+                                    <div class="caption">
+                                        <h3><a class="hover-effect" href="#">@a.Name</a></h3>
+                                        <p>@a.Describle</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <!--=== End Product Content ===-->
+   
+
+@section Scripts{
+    <script src="~/Plugins/jquery.parallax.js"></script>
+    <script src="~/Plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+    <script src="~/Plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="~/Scripts/plugins/owl-carousel.js"></script>
+    <script src="~/Scripts/plugins/revolution-slider.js"></script>
+    <script src="~/Scripts/shop.app.js"></script>
+   
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            App.initParallaxBg();
+            OwlCarousel.initOwlCarousel();
+            RevolutionSlider.initRSfullWidth();
+        });
+    </script>
+
+}

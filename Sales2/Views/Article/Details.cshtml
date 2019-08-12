@@ -1,0 +1,42 @@
+﻿@model Sales.Areas.Manage.Models.Article
+@using Microsoft.AspNet.Identity.Owin
+@using Sales.Models
+@{
+    ViewBag.Title = "View";
+    var UserManage = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+}
+
+<div class="blog container">
+
+    <div id="blog-entry" class="blog-entry section col-md-8 col-sm-8 col-xs-12">
+        <article class="post">
+            <h2 class="title">@Model.Name</h2>
+            <div class="meta">
+                <ul class="meta-list list-inline">
+                    <li class="post-time post_date date updated">@Model.Create.Time</li>
+                    <li class="post-author">
+                        Người viết
+                        <a href="#">
+                            @{
+                                try
+                                {
+                                    @UserManage.FindByIdAsync(Model.Create.User).Result.UserName;
+                                }
+                                catch
+                                {
+                                    <label></label>;
+                                }
+                            }
+                        </a>
+                    </li>
+                </ul><!--//meta-list-->
+            </div><!--meta-->
+            <div class="post-thumb">
+                <img class="img-responsive" src="@Model.Image" alt="" />
+            </div><!--//post-thumb-->
+            <div class="content">
+                @Html.Raw(@Model.Content)
+            </div>
+        </article><!--//post-->
+    </div><!--//blog-entry-->
+</div>

@@ -1,0 +1,98 @@
+﻿@model Sales.Areas.Manage.Models.MenuModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MenuModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRoot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRoot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsParent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsParent)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Target)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Target)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Edit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Edit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

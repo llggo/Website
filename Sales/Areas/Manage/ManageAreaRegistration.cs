@@ -17,7 +17,7 @@ namespace Sales.Areas.Manage
             context.MapRoute(
                 "Manage_default",
                 "Manage/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

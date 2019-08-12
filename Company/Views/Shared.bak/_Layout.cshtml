@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @using Company.Extends.Language
+
+
+    <title>@ViewBag.Title - @Resource.website_title</title>
+    @Styles.Render("~/template/tempo")
+    
+
+</head>
+<body class="home-page">
+    <div class="wrapper">
+        @Html.Partial("_Header")
+        @RenderBody()
+    </div>
+
+    <!-- ******FOOTER****** -->
+    @Html.Partial("_Footer")
+
+    @Html.Partial("_Modal")
+
+    <!-- *****CONFIGURE STYLE****** -->
+    <div class="config-wrapper">
+        <div class="config-wrapper-inner">
+            <a id="config-trigger" class="config-trigger" data-toggle="modal" data-target="#exampleModal" data-whatever="getbootstrap" href="#"><i class="fa fa-comments"></i></a>
+        </div><!--//config-wrapper-inner-->
+    </div><!--//config-wrapper-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">@Resource.website_contact_us</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">@Resource.website_fullname:</label>
+                            <input type="text" class="form-control" id="fullname-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">@Resource.website_message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.website_button_close</button>
+                    <button type="button" id="button-send" class="btn btn-primary" data-dismiss="modal">@Resource.website_button_send_message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/template/tempo")
+    @Scripts.Render("~/bundles/template/tempo/main")
+    <script src="~/Extends/Content/Template/SmartAdmin/js/app.config.seed.js"></script>
+    @Scripts.Render("~/bundles/jquery/signalR")
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/bundles/plugin/smart-chat-ui")
+    <script>
+        $(document).ready(function () {
+            $('#button-send').click(function () {
+                console.log("send click");
+                var name = document.getElementById('fullname-name').value;
+                var mes = document.getElementById('message-text').value;
+
+                chathub.server.guestSend(name, mes);
+            });
+        });
+
+        chathub.client.received = function (user, msg) {
+            console.log(user.Id + " - " + msg);
+            chatboxManager.messageSentCallback(user.Id, user.UserName, msg);
+        }
+
+
+        $.connection.hub.logging = true;
+        $.connection.hub.start().done(function () {
+            console.log("hub start");
+            
+        });
+
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

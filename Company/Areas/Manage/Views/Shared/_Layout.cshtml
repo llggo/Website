@@ -189,7 +189,7 @@
             <!-- breadcrumb -->
             <ol class="breadcrumb">
                 <li>Home</li>
-                <li>Blank</li>
+                <li>Manage</li>
             </ol>
             <!-- end breadcrumb -->
             <!-- You can also add more buttons to the
@@ -255,7 +255,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/template/smart-admin")
     @Scripts.Render("~/bundles/jquery/signalR")
-    @Scripts.Render("~/signalr/hubs")
+    @*@Scripts.Render("~/signalr/hubs")*@
     @Scripts.Render("~/bundles/plugin/smart-chat-ui")
     
 
@@ -289,25 +289,25 @@
             $(".config-wrapper").offset({ top: topVal });
         });
 
-        var chatlist = document.getElementById('chat-lists');
+        //var chatlist = document.getElementById('chat-lists');
 
-        chathub.client.received = function (user, msg) {
-            chatboxManager.messageSentCallback(user.Id, user.UserName, msg);
-        }
+        //chathub.client.received = function (user, msg) {
+        //    chatboxManager.messageSentCallback(user.Id, user.UserName, msg);
+        //}
         
-        chathub.client.updateList = function (users) {
-            console.log(users);
-            chatlist.innerHTML = "";
-            for (var i = 0; i < users.length; i++) {
-                chatlist.innerHTML += "<a href=\"#\" class=\"usr\" onclick=\"NewChatBox('" + users[i].Value.Id + "','" + users[i].Value.UserName + "')\">" + users[i].Value.UserName + "</a>";
-            }
-        }
+        //chathub.client.updateList = function (users) {
+        //    console.log(users);
+        //    chatlist.innerHTML = "";
+        //    for (var i = 0; i < users.length; i++) {
+        //        chatlist.innerHTML += "<a href=\"#\" class=\"usr\" onclick=\"NewChatBox('" + users[i].Value.Id + "','" + users[i].Value.UserName + "')\">" + users[i].Value.UserName + "</a>";
+        //    }
+        //}
 
-        // Start Hub
-        $.connection.hub.logging = true;
-        $.connection.hub.start().done(function () {
-            console.log("hub start")
-        });
+        //// Start Hub
+        //$.connection.hub.logging = true;
+        //$.connection.hub.start().done(function () {
+        //    console.log("hub start")
+        //});
     </script>
     @RenderSection("scripts", required: false)
 </body>

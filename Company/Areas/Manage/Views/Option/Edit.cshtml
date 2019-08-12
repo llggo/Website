@@ -26,43 +26,7 @@
     @Html.AntiForgeryToken()
 
 @Html.HiddenFor(m => m.Option.Id)
-<div class="row">
-    <div class="col-md-2">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Option.ClientEnable)
-            @Html.DropDownListFor(m => m.Option.ClientEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
-            @Html.ValidationMessageFor(model => model.Option.ClientEnable, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Option.OurProductsEnable)
-            @Html.DropDownListFor(m => m.Option.OurProductsEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
-            @Html.ValidationMessageFor(model => model.Option.OurProductsEnable, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Option.IntroEnable)
-            @Html.DropDownListFor(m => m.Option.IntroEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
-            @Html.ValidationMessageFor(model => model.Option.IntroEnable, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Option.LiveChatEnable)
-            @Html.DropDownListFor(m => m.Option.LiveChatEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
-            @Html.ValidationMessageFor(model => model.Option.LiveChatEnable, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Option.SignUpEnable)
-            @Html.DropDownListFor(m => m.Option.SignUpEnable, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
-            @Html.ValidationMessageFor(model => model.Option.SignUpEnable, "", new { @class = "text-danger" })
-        </div>
-    </div>
-</div>
+
 
 <!-- Widget ID (each widget will need unique ID)-->
 <div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
@@ -156,53 +120,7 @@
                                                                     </div><!-- /input-group -->
                                                                 </div>
                                                             </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].LogoProducts)
-                                                                    <div class="input-group">
-                                                                        @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].LogoProducts, new { @id = "text-image-logo3-" + @l.CodeCheck, @class = "form-control" })
-                                                                        <span class="input-group-btn">
-                                                                            <button id="upload-image-logo3-@l.CodeCheck" class="btn btn-default" type="button">Browser...</button>
-                                                                        </span>
-                                                                    </div><!-- /input-group -->
-                                                                </div>
-                                                            </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].WhyUs, new { @class = ""})
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].WhyUs, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].OurProductsDes, new { @class = "" })
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].OurProductsDes, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].IntroTitle)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].IntroTitle, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].IntroDescribe)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].IntroDescribe, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].SignUpTitle)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].SignUpTitle, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].SignUpDescribe)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].SignUpDescribe, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
+        
                                                             <div class="row form-group">
                                                                 <div class="col-md-12">
                                                                     @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].AboutUs)
@@ -223,12 +141,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Phone2)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Phone2, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
+                                                           
 
                                                             <div class="row form-group">
                                                                 <div class="col-md-12">
@@ -237,26 +150,16 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Email2)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Email2, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
+                                                            
 
                                                             <div class="row form-group">
                                                                 <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Address1)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Address1, new { @class = "form-control" })
+                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Address)
+                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Address, new { @class = "form-control" })
                                                                 </div>
                                                             </div>
 
-                                                            <div class="row form-group">
-                                                                <div class="col-md-12">
-                                                                    @Html.LabelFor(model => model.OptionLanguage[l.CodeCheck].Address2)
-                                                                    @Html.TextBoxFor(model => model.OptionLanguage[l.CodeCheck].Address2, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
+                                                            
 
                                                         </div>
                                                     </div>

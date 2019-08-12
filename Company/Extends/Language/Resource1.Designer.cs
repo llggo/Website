@@ -19,7 +19,7 @@ namespace Company.Extends.Language {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource {
@@ -169,7 +169,7 @@ namespace Company.Extends.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kết nối.
+        ///   Looks up a localized string similar to Connect.
         /// </summary>
         public static string website_blog_get_connected {
             get {
@@ -223,7 +223,7 @@ namespace Company.Extends.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright by Miraway.
+        ///   Looks up a localized string similar to Copyright byThang Hoa.
         /// </summary>
         public static string website_copyright {
             get {
@@ -376,7 +376,7 @@ namespace Company.Extends.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mirasoft.
+        ///   Looks up a localized string similar to Thang Hoa.
         /// </summary>
         public static string website_logo_title {
             get {
@@ -484,7 +484,7 @@ namespace Company.Extends.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Miraway.
+        ///   Looks up a localized string similar to Thang Hoa.
         /// </summary>
         public static string website_title {
             get {

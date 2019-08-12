@@ -12,6 +12,7 @@ namespace Company.Areas.Manage.Models
         public string Order { get; set; }
 
         public bool Visible { get; set; }
+        public bool FloatRight { get; set; }
 
         public string CreateUser { get; set; }
 

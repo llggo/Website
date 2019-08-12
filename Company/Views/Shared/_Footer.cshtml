@@ -1,45 +1,148 @@
 ﻿@using Company.Extends.Library
 @using Company.Extends.Language
-@{ 
+@{
     var data = new Data();
     var ov = data.OptionView();
 }
 
-<footer class="footer" style="background-image:url('../../Images/Footer.png'); background-size:cover;">
-    <div class="footer-content">
+
+
+<div class="footer-v4">
+    <div class="footer">
         <div class="container">
             <div class="row">
-                <div class="footer-col col-md-12 col-sm-12 col-sm-12 about">
-                    <div class="footer-col-inner">
-                        <img style="height:auto; max-width:200px; margin-bottom:10px;" class="image img-responsive" src="@ov.OptionLanguage.LogoBottomPath" />
-                        <p style="color:grey;">@ov.OptionLanguage.AboutUs</p>
-                        @if (@ov.OptionLanguage.AboutUsTarget != null)
-                        {
-                            if (ov.OptionLanguage.AboutUsTarget.Equals(""))
-                            {
-                                <p><a class="more" href="@ov.OptionLanguage.AboutUsTarget">@Resource.website_button_view_more <i class="fa fa-long-arrow-right"></i></a></p>
-                            }
-                        }
-                        
-
-                    </div><!--//footer-col-inner-->
-                </div><!--//foooter-col-->
-            </div><!--//row-->
-
-            <div class="row" style="padding-bottom:10px;">
-                <div class="col-md-12" style="">
+                <!-- About -->
+                <div class="col-md-4 md-margin-bottom-40">
+                    <a href="index.html"><img class="footer-logo" src="@ov.OptionLanguage.LogoBottomPath" alt=""></a>
+                    <p>@ov.OptionLanguage.AboutUs</p>
+                    <br>
+                    <ul class="list-unstyled address-list margin-bottom-20">
+                        <li><i class="fa fa-angle-right"></i>@ov.OptionLanguage.Address</li>
+                        <li><i class="fa fa-angle-right"></i>Phone: @ov.OptionLanguage.Phone</li>
+                        <li><i class="fa fa-angle-right"></i>Email: @ov.OptionLanguage.Email</li>
+                    </ul>
+                    <ul class="list-inline shop-social">
+                        <li><a href="#"><i class="fb rounded-md fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="tw rounded-md fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="gp rounded-md fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="yt rounded-md fa fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+                <!-- End About -->
+                <!-- Simple List -->
+                <div class="col-md-2 col-sm-3">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h5>@Resource.website_address_1</h5>
-                            <p style="color:grey; margin-top: 10px !important;">@ov.OptionLanguage.Address1 <br> Telephone.No: @ov.OptionLanguage.Phone <br> Hotline: (+84) 966 501 166</p>
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Secciones</h2>
+                            <ul class="list-unstyled simple-list margin-bottom-20">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li><a href="#">Documentos </a></li>
+                                <li><a href="#">Francisco papa</a></li>
+                                <li>...</li>
+                            </ul>
                         </div>
-                        <div class="col-md-6">
-                            <h5>@Resource.website_address_2</h5>
-                            <p style="color:grey; margin-top: 10px !important;">@ov.OptionLanguage.Address2 <br> Telephone.No: @ov.OptionLanguage.Phone2 <br> Hotline: (+84) 966 501 166</p>
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Temas</h2>
+                            <ul class="list-unstyled simple-list">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li><a href="#">Documentos </a></li>
+                                <li><a href="#">Francisco papa</a></li>
+                                <li>...</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-2 col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Utilidades</h2>
+                            <ul class="list-unstyled simple-list margin-bottom-20">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li><a href="#">Documentos </a></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Documentos</h2>
+                            <ul class="list-unstyled simple-list">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li><a href="#">Documentos </a></li>
+                                <li><a href="#">Francisco papa</a></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Publicidad</h2>
+                            <ul class="list-unstyled simple-list margin-bottom-20">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li><a href="#">Documentos </a></li>
+                                <li><a href="#">Francisco papa</a></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Contacto</h2>
+                            <ul class="list-unstyled simple-list">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li><a href="#">Documentos </a></li>
+                                <li><a href="#">Francisco papa</a></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Utilidades</h2>
+                            <ul class="list-unstyled simple-list margin-bottom-20">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-xs-6">
+                            <h2 class="thumb-headline">Documentos</h2>
+                            <ul class="list-unstyled simple-list">
+                                <li><a href="#">Ultima Hora</a></li>
+                                <li><a href="#">Exclusiva</a></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Simple List -->
+            </div><!--/end row-->
+        </div><!--/end continer-->
+    </div><!--/footer-->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        2017 &copy; Thanghoafoods. ALL Rights Reserved.
+                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline sponsors-icons pull-right">
+                        <li><i class="fa fa-cc-paypal"></i></li>
+                        <li><i class="fa fa-cc-visa"></i></li>
+                        <li><i class="fa fa-cc-mastercard"></i></li>
+                        <li><i class="fa fa-cc-discover"></i></li>
+                    </ul>
+                </div>
             </div>
-        </div><!--//container-->
-    </div><!--//footer-content-->
-</footer><!--//footer-->
+        </div>
+    </div><!--/copyright-->
+</div>

@@ -67,6 +67,16 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.SliderLanguage[m.Key].Content)
+                                                @Html.TextBoxFor(model => model.SliderLanguage[m.Key].Content, new { @class = "form-control" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.SliderLanguage[m.Key].Target)
+                                                @Html.TextBoxFor(model => model.SliderLanguage[m.Key].Target, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
                                             <div class="col-md-12">
                                                 @Html.LabelFor(model => model.SliderLanguage[m.Key].Image)
                                                 <div class="input-group">
@@ -92,6 +102,11 @@
             @Html.LabelFor(model => model.Slider.Visible)
             @Html.DropDownListFor(m => m.Slider.Visible, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
             @Html.ValidationMessageFor(model => model.Slider.Visible, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.Slider.FloatRight)
+            @Html.DropDownListFor(m => m.Slider.FloatRight, new SelectList(item, "Value", "Text"), new { @class = "selectpicker form-control" })
+            @Html.ValidationMessageFor(model => model.Slider.FloatRight, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-2">
             @Html.LabelFor(model => model.Slider.Order, htmlAttributes: new { @class = "control-label" })

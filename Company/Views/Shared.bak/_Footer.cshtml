@@ -1,0 +1,45 @@
+﻿@using Company.Extends.Library
+@using Company.Extends.Language
+@{ 
+    var data = new Data();
+    var ov = data.OptionView();
+}
+
+<footer class="footer" style="background-image:url('../../Images/Footer.png'); background-size:cover;">
+    <div class="footer-content">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-md-12 col-sm-12 col-sm-12 about">
+                    <div class="footer-col-inner">
+                        <img style="height:auto; max-width:200px; margin-bottom:10px;" class="image img-responsive" src="@ov.OptionLanguage.LogoBottomPath" />
+                        <p style="color:grey;">@ov.OptionLanguage.AboutUs</p>
+                        @if (@ov.OptionLanguage.AboutUsTarget != null)
+                        {
+                            if (ov.OptionLanguage.AboutUsTarget.Equals(""))
+                            {
+                                <p><a class="more" href="@ov.OptionLanguage.AboutUsTarget">@Resource.website_button_view_more <i class="fa fa-long-arrow-right"></i></a></p>
+                            }
+                        }
+                        
+
+                    </div><!--//footer-col-inner-->
+                </div><!--//foooter-col-->
+            </div><!--//row-->
+
+            <div class="row" style="padding-bottom:10px;">
+                <div class="col-md-12" style="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>@Resource.website_address_1</h5>
+                            <p style="color:grey; margin-top: 10px !important;">@ov.OptionLanguage.Address1 <br> Telephone.No: @ov.OptionLanguage.Phone <br> Hotline: (+84) 966 501 166</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>@Resource.website_address_2</h5>
+                            <p style="color:grey; margin-top: 10px !important;">@ov.OptionLanguage.Address2 <br> Telephone.No: @ov.OptionLanguage.Phone2 <br> Hotline: (+84) 966 501 166</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--//container-->
+    </div><!--//footer-content-->
+</footer><!--//footer-->

@@ -1,0 +1,36 @@
+﻿@using Company.Extends.Language
+@using Company.Extends.Library
+@{ 
+    var data = new Data();
+    var option = data.OptionView();
+}
+<header id="header" class="header">
+    <div class="container">
+        <h1 class="logo pull-left">
+            <a href="/">
+                @if (option.OptionLanguage.LogoPath == null || option.OptionLanguage.LogoPath == "")
+                {
+                    <span class="logo-title">@Resource.website_logo_title</span>
+                }
+                else
+                {
+                    <img style="height:auto; max-width:200px;" class="image img-responsive" src="@option.OptionLanguage.LogoPath" />
+                }
+                
+            </a>
+        </h1><!--//logo-->
+        <nav id="main-nav" class="main-nav navbar-right" role="navigation">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button><!--//nav-toggle-->
+            </div><!--//navbar-header-->
+            <div class="navbar-collapse collapse" id="navbar-collapse">
+                 @Html.Partial("_Menu")
+            </div><!--//navabr-collapse-->
+        </nav><!--//main-nav-->
+    </div><!--//container-->
+</header><!--//header-->

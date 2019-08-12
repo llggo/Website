@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Sales.Areas.Manage.Models;
 
 namespace Sales.Models
 {
@@ -17,12 +16,17 @@ namespace Sales.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Language { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("LocalConnection", throwIfV1Schema: false)
         {
         }
 
@@ -40,7 +44,5 @@ namespace Sales.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
-
-        public DbSet<MenuModel> Menu { get; set; }
     }
 }

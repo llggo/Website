@@ -1,0 +1,60 @@
+﻿@using Sales.Models
+@{
+    var db = new ApplicationDbContext();
+
+    var option = db.Option.FirstOrDefault();
+
+}
+
+<div class="footer-v4">
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- About -->
+                <div class="col-md-6 md-margin-bottom-40">
+                    @*<a href="index.html"><img class="footer-logo" src="@option.Logo" alt=""></a>*@
+                    <p>@option.Infomation</p>
+                    <br>
+
+                    <ul class="list-unstyled address-list margin-bottom-20">
+                        <li><i class="fa fa-angle-right"></i>@option.Address</li>
+                        <li><i class="fa fa-angle-right"></i>Phone: @option.Phone</li>
+                        <li><i class="fa fa-angle-right"></i>Fax: @option.Fax</li>
+                        <li><i class="fa fa-angle-right"></i>Email: @option.Email</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6 md-margin-bottom-40">
+                    <p>LIÊN KẾT</p>
+                    <br />
+                    
+                    <ul class="list-unstyled address-list margin-bottom-20">
+                        <li><i class="fa fa-angle-right"></i><a href="http://thucphamthanghoa.com">thucphamthanghoa.com</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="http://thanghoafoods.com">thanghoafoods.com</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="http://saythanghoa.info">saythanghoa.info</a></li>
+                    </ul>
+
+                    @*<ul class="list-inline shop-social">
+                        <li><a href="@option.Facbook"><i class="fb rounded-md fa fa-facebook"></i></a></li>
+                        <li><a href="@option.Twitter"><i class="tw rounded-md fa fa-twitter"></i></a></li>
+                        <li><a href="@option.Google"><i class="gp rounded-md fa fa-google-plus"></i></a></li>
+                        <li><a href="@option.Youtube"><i class="yt rounded-md fa fa-youtube"></i></a></li>
+                    </ul>*@
+                </div>
+                <!-- End About -->
+                
+            </div><!--/end row-->
+        </div><!--/end continer-->
+    </div><!--/footer-->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        @DateTime.Now.Year &copy; Thanghoafoods. ALL Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div><!--/copyright-->
+</div>

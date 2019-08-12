@@ -2,170 +2,135 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-
-    <title>@ViewBag.Title</title>
-    <link href="~/Plugins/bootstrap/css/bootstrap-manage.css" rel="stylesheet" />
-    <link href="~/Content/areas/manage/smartadmin-production.css" rel="stylesheet" />
-    <link href="~/Content/areas/manage/smartadmin-production-plugins.css" rel="stylesheet" />
-    <link href="~/Content/areas/manage/smartadmin-skins.css" rel="stylesheet" />
-    <link href="~/Plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
-    <!-- #GOOGLE FONT -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-
-    <!-- #APP SCREEN / ICONS -->
-    <!-- Specifying a Webpage Icon for Web Clip
-         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-    <link rel="apple-touch-icon" href="~/Images/splash/sptouch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="~/Images/splash/touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="~/Images/splash/touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="~/Images/splash/touch-icon-ipad-retina.png">
-
-    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <!-- Startup image for web apps -->
-    <link rel="apple-touch-startup-image" href="~/Images/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-    <link rel="apple-touch-startup-image" href="~/Images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-    <link rel="apple-touch-startup-image" href="~/Images/splash/iphone.png" media="screen and (max-device-width: 320px)">
-
+    <meta name="description" content="Introduction">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no, minimal-ui">
+    <!-- Call App Mode on ios devices -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- base css -->
+    @Styles.Render("~/bundles/manage/css")
+    @*<link rel="stylesheet" media="screen, print" href="~/Content/Manage/css/vendors.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="~/Content/Manage/css/app.bundle.css">*@
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/Manage/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/Manage/img/favicon/favicon-32x32.png">
+    <link rel="mask-icon" href="~/Content/Manage/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
 </head>
-
-<!--
-
-    TABLE OF CONTENTS.
-
-    Use search to find needed section.
-
-    ===================================================================
-
-    |  01. #CSS Links                |  all CSS links and file paths  |
-    |  02. #FAVICONS                 |  Favicon links and file paths  |
-    |  03. #GOOGLE FONT              |  Google font link              |
-    |  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
-    |  05. #BODY                     |  body tag                      |
-    |  06. #HEADER                   |  header tag                    |
-    |  07. #PROJECTS                 |  project lists                 |
-    |  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
-    |  09. #MOBILE                   |  mobile view dropdown          |
-    |  10. #SEARCH                   |  search field                  |
-    |  11. #NAVIGATION               |  left panel & navigation       |
-    |  12. #MAIN PANEL               |  main panel                    |
-    |  13. #MAIN CONTENT             |  content holder                |
-    |  14. #PAGE FOOTER              |  page footer                   |
-    |  15. #SHORTCUT AREA            |  dropdown shortcuts area       |
-    |  16. #PLUGINS                  |  all scripts and plugins       |
-
-    ===================================================================
-
-    -->
-<!-- #BODY -->
-<!-- Possible Classes
-
-    * 'smart-style-{SKIN#}'
-    * 'smart-rtl'         - Switch theme mode to RTL
-    * 'menu-on-top'       - Switch to top navigation (no DOM change required)
-    * 'no-menu'			  - Hides the menu completely
-    * 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
-    * 'fixed-header'      - Fixes the header
-    * 'fixed-navigation'  - Fixes the main menu
-    * 'fixed-ribbon'      - Fixes breadcrumb
-    * 'fixed-page-footer' - Fixes footer
-    * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
--->
-<body class="smart-style-7 hidden-menu">
-
-    @Html.Partial("~/Areas/Manage/Views/Shared/_Header.cshtml")
-
-    @Html.Partial("~/Areas/Manage/Views/Shared/_Aside.cshtml")
-
-    <!-- #MAIN PANEL -->
-    <div id="main" role="main">
-
-        <!-- RIBBON -->
-        <div id="ribbon">
-
-            <!-- breadcrumb -->
-            <ol class="breadcrumb">
-                <li>Home</li>
-                <li>Blank</li>
-            </ol>
-            <!-- end breadcrumb -->
-            <!-- You can also add more buttons to the
-            ribbon for further usability
-
-            Example below:
-
-            <span class="ribbon-button-alignment pull-right" style="margin-right:25px">
-                <a href="#" id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa fa-grid"></i> Change Grid</a>
-                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa fa-plus"></i> Add</span>
-                <button id="search" class="btn btn-ribbon" data-title="search"><i class="fa fa-search"></i> <span class="hidden-mobile">Search</span></button>
-            </span> -->
-
-        </div>
-        <!-- END RIBBON -->
-        <!-- #MAIN CONTENT -->
-        <div id="content">
-                @RenderBody()
-            <!-- end col -->
-            <!-- end row -->
-            <!-- END #MAIN CONTENT -->
-        </div>
-        
-    </div>
-    <!-- END #MAIN PANEL -->
-
-    @Html.Partial("~/Areas/Manage/Views/Shared/_Footer.cshtml")
-
-    <!-- #SHORTCUT AREA : With large tiles (activated via clicking user name tag)
-         Note: These tiles are completely responsive, you can add as many as you like -->
-
-    <div id="shortcut">
-        <ul>
-            <li>
-                <a href="index.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
-            </li>
-        </ul>
-    </div>
-    <!-- END SHORTCUT AREA -->
-    <!--================================================== -->
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
-    <!-- #PLUGINS -->
-
-    
-
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-
-    <script src="~/Scripts/jquery-ui-1.10.3.min.js"></script>
- 
-    @Scripts.Render("~/bundles/jqueryval")
-
-
-    <script src="~/Scripts/areas/manage/bootstrap/bootstrap.js"></script>
-    <script src="~/Scripts/areas/manage/app.config.seed.js"></script>
-    <script src="~/Scripts/areas/manage/app.seed.js"></script>
-
+<body class="mod-bg-1 ">
+    <!-- DOC: script to save and load page settings -->
     <script>
-        $(document).ready(function () {
-            pageSetUp();
-        });
+        /**
+            *	This script should be placed right after the body tag for fast execution
+            *	Note: the script is written in pure javascript and does not depend on thirdparty library
+            **/
+        'use strict';
 
-        /* ======= Style Switcher (REMOVE ON YOUR PRODUCTION SITE) ======= */
+        var classHolder = document.getElementsByTagName("BODY")[0],
+            /**
+                * Load from localstorage
+                **/
+            themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+                {},
+            themeURL = themeSettings.themeURL || '',
+            themeOptions = themeSettings.themeOptions || '';
+        /**
+            * Load theme options
+            **/
+        if (themeSettings.themeOptions) {
+            classHolder.className = themeSettings.themeOptions;
+            console.log("%c✔ Theme settings loaded", "color: #148f32");
+        }
+        else {
+            console.log("Heads up! Theme settings is empty or does not exist, loading default settings...");
+        }
+        if (themeSettings.themeURL && !document.getElementById('mytheme')) {
+            var cssfile = document.createElement('link');
+            cssfile.id = 'mytheme';
+            cssfile.rel = 'stylesheet';
+            cssfile.href = themeURL;
+            document.getElementsByTagName('head')[0].appendChild(cssfile);
+        }
+        /**
+            * Save to localstorage
+            **/
+        var saveSettings = function () {
+            themeSettings.themeOptions = String(classHolder.className).split(/[^\w-]+/).filter(function (item) {
+                return /^(nav|header|mod|display)-/i.test(item);
+            }).join(' ');
+            if (document.getElementById('mytheme')) {
+                themeSettings.themeURL = document.getElementById('mytheme').getAttribute("href");
+            };
+            localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
+        }
+        /**
+            * Reset settings
+            **/
+        var resetSettings = function () {
+            localStorage.setItem("themeSettings", "");
+        }
 
 
+        /**/</script>
+    <!-- BEGIN Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="page-inner">
+            <!-- BEGIN Left Aside -->
+            @Html.Partial("_LeftAside")
+            <!-- END Left Aside -->
+            <div class="page-content-wrapper">
+                @Html.Partial("_Header")
+                <!-- BEGIN Page Content -->
+                <!-- the #js-page-content id is needed for some plugins to initialize -->
+                <main id="js-page-content" role="main" class="page-content">
+                    <ol class="breadcrumb page-breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
+                        <li class="breadcrumb-item">Application Intel</li>
+                        <li class="breadcrumb-item active">Introduction</li>
+                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+                    </ol>
 
-        $(window).scroll(function () {
-            var offset = 100;
-            var topVal = $(window).scrollTop() + offset;
-            $(".config-wrapper").offset({ top: topVal });
-        });
+                    @RenderBody()
 
-        
-    </script>
+                </main>
+                <!-- this overlay is activated only when mobile menu is triggered -->
+                <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
+                <!-- BEGIN Page Footer -->
+                @Html.Partial("_Footer")
+                <!-- END Page Footer -->
+                <!-- BEGIN Shortcuts -->
+                @Html.Partial("_Shortcuts")
+                <!-- END Shortcuts -->
+            </div>
+        </div>
+    </div>
+    <!-- END Page Wrapper -->
+    <!-- BEGIN Quick Menu -->
+    @Html.Partial("_QuickMenu")
+    <!-- END Quick Menu -->
+    <!-- BEGIN Messenger -->
+    @Html.Partial("_Messenger")
+    <!-- END Messenger -->
+    <!-- BEGIN Page Settings -->
+    @Html.Partial("_PageSettings")
+    <!-- END Page Settings -->
+    <!-- base vendor bundle:
+            DOC: if you remove pace.js from core please note on Internet Explorer some CSS animations may execute before a page is fully loaded, resulting 'jump' animations
+                    + pace.js (recommended)
+                    + jquery.js (core)
+                    + jquery-ui-cust.js (core)
+                    + popper.js (core)
+                    + bootstrap.js (core)
+                    + slimscroll.js (extension)
+                    + app.navigation.js (core)
+                    + ba-throttle-debounce.js (core)
+                    + waves.js (extension)
+                    + smartpanels.js (extension)
+                    + src/../jquery-snippets.js (core) -->
+
+    @Scripts.Render("~/bundles/manage/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

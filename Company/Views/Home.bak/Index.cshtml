@@ -1,0 +1,247 @@
+﻿@model Company.Models.HomeView
+@using Company.Extends.Language
+@using Company.Models
+@using System.Threading
+@using Company.Extends.Library
+@using HtmlAgilityPack
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+    var language = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+    var customer = new Customer();
+    var data = new Data();
+    HtmlDocument htmlDoc = new HtmlDocument();
+}
+
+@*<link href="~/Extends/Content/Plugin/revolution-slider/rs-plugin/css/settings.css" rel="stylesheet" />*@
+<link href="~/Extends/Content/Css/style.css" rel="stylesheet" />
+<link href="~/Extends/Content/Plugin/owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet" />
+<link href="~/Extends/Content/Plugin/master-slider/masterslider/style/masterslider.css" rel="stylesheet" />
+<link href="~/Extends/Content/Plugin/master-slider/masterslider/skins/black-2/style.css" rel="stylesheet" />
+<link href="~/Extends/Content/Plugin/jquery-circle-progress-1.2.2/docs/styles.css" rel="stylesheet" />
+
+
+<div class="ms-layers-template">
+    <div class="master-slider ms-skin-black-2 round-skin" id="masterslider">
+        @foreach (var sl in Model.SliderView)
+        {
+            <div class="ms-slide" style="z-index: 10;"
+                 data-delay="6">
+                <img src="~/Extends/Content/Plugin/master-slider/masterslider/style/blank.gif" data-src="@((sl.ArticleLanguage.Image != null) ? sl.ArticleLanguage.Image : "Images/slide_background.jpg")" alt="">
+
+                <div class="row ms-layer"
+                     data-effect="bottom(40)"
+                     data-duration="2000"
+                     data-delay="1000"
+                     data-ease="easeOutExpo"
+                     style="">
+
+                    <div class="col-md-12" style="text-align:center; top:200px;">
+                        <span style="color:white; font-size:34px; font-family:Neutra_2; line-height:1; ">@sl.ArticleLanguage.Describe</span>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<!-- ******WHY****** -->
+<section id="why" class="why section" style="margin:40px 0 20px 0;">
+    <div class="container">
+        <h2 class="title text-center" style="color:#0c829d; margin-bottom:20px;">@Resource.website_why_us</h2>
+        <p class="text-center">@Model.OptionView.OptionLanguage.WhyUs</p>
+
+        @{
+            var l = Model.ArticleViewComments.Count();
+
+            switch (l)
+            {
+                case 5:
+                    <div class="row">
+                        @for (int j = 0; j <= 2; j++)
+                        {
+                            string value;
+                            try
+                            {
+                                value = (float.Parse(Model.ArticleViewComments[j].ArticleLanguage.Image) / 100).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                            }
+                            catch
+                            {
+                                value = "0";
+                            }
+
+
+                            <div class="item col-md-4 center-block">
+                                <div class="circle item col-md-4 center-block" style="width:100%;" data-value="@value" data-size="120" data-thickness="12" data-animation-start-value="0" data-fill="{&quot;color&quot;: &quot;@Model.ArticleViewComments[j].ArticleLanguage.Describe&quot;}" data-reverse="false">
+                                    <strong></strong>
+                                    <span class="quote-box text-center">
+                                        @Html.Raw(Model.ArticleViewComments[j].ArticleLanguage.Name)
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            @for (int j = 3; j <= 4; j++)
+                            {
+
+                                string value;
+                                try
+                                {
+                                    value = (float.Parse(Model.ArticleViewComments[j].ArticleLanguage.Image) / 100).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                                }
+                                catch
+                                {
+                                    value = "0";
+                                }
+
+
+                                <div class="item col-md-4 center-block">
+                                    <div class="circle item col-md-4 center-block" style="width:100%;" data-value="@value" data-size="120" data-thickness="12" data-animation-start-value="0" data-fill="{&quot;color&quot;: &quot;@Model.ArticleViewComments[j].ArticleLanguage.Describe&quot;}" data-reverse="false">
+                                        <strong></strong>
+                                        <span class="quote-box text-center">
+                                            @Html.Raw(Model.ArticleViewComments[j].ArticleLanguage.Name)
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    break;
+                default:
+                    <div class="row">
+                        @{ 
+                            int i = 0;
+                        }
+                        @foreach (var c in Model.ArticleViewComments)
+                        {
+
+                            string value;
+                            try
+                            {
+                                value = (float.Parse(c.ArticleLanguage.Image) / 100).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                            }
+                            catch
+                            {
+                                value = "0";
+                            }
+
+
+                            <div class="item col-md-4 center-block">
+                                <div class="circle item col-md-4 center-block" style="width:100%;" data-value="@value" data-size="120" data-thickness="12" data-animation-start-value="0" data-fill="{&quot;color&quot;: &quot;@c.ArticleLanguage.Describe&quot;}" data-reverse="false">
+                                    <strong></strong>
+                                    <span class="quote-box text-center">
+                                        @Html.Raw(c.ArticleLanguage.Name)
+                                    </span>
+                                </div>
+                            </div>
+
+                            if (i == 2)
+                            {
+                                break;
+                            }
+                            i++;
+
+                        }
+                    </div>
+                                break;
+                            }
+        }
+
+    </div>
+</section>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 center-block">
+            <hr style="width:40%;" />
+        </div>
+    </div>
+</div>
+
+
+<sction>
+    <div class="container" style="margin:10px auto;">
+        <h2 class="title text-center" style="color:#0c829d; margin:20px 0;">@Resource.website_our_products</h2>
+        <p class="intro text-center">@Model.OptionView.OptionLanguage.OurProductsDes</p>
+    </div>
+    <div class="container">
+        <div class="row margin-bottom-20">
+            @foreach (var spv in Model.SpecificProductsView)
+            {
+                
+                htmlDoc.LoadHtml(spv.ArticleLanguage.Content);
+                string url = htmlDoc.DocumentNode.InnerText;
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnails thumbnail-style thumbnail-kenburn">
+                        <div class="thumbnail-img">
+                            <div style="overflow:hidden;" class="overflow-hidden">
+                                <a href="@url">
+                                    <img class="img-responsive" src="@spv.ArticleLanguage.Image" alt="">
+                                </a>
+                            </div>
+                            <a class="btn-more hover-effect" style="background-color:orange;" href="@url">@Resource.website_button_view_more</a>
+                        </div>
+                        <div class="caption" style="margin-top:40px; text-align:center;">
+                            <h5><a class="hover-effect" style="color:#555555; font-size:15px;" href="@url"><b>@spv.ArticleLanguage.Name</b></a></h5>
+                            <p>@spv.ArticleLanguage.Describe</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+   
+</sction>
+
+<!-- ******PRESS****** -->
+@if (Model.OptionView.Option.ClientEnable)
+{
+    <div class="press">
+        <div class="container text-center">
+            <div class="row">
+                <div class="headline"><h2 style="color:#0c829d;">@Resource.website_our_client</h2></div>
+                <div class="owl-clients-v1" style="margin-top:30px;">
+                    @foreach (var c in Model.ClientView)
+                {
+                        <div class="item">
+                            <center>
+                                <img src="@c.ClientLanguage.Image" alt="">
+                            </center>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Extends/Content/Plugin/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Extends/Content/Plugin/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.js"></script>
+    <script src="~/Extends/Content/Scripts/revolution-slider.js"></script>
+    <script src="~/Extends/Content/Plugin/owl-carousel/owl-carousel/owl.carousel.js"></script>
+    <script src="~/Extends/Content/Scripts/owl-carousel.js"></script>
+    <script src="~/Extends/Content/Plugin/master-slider/masterslider/masterslider.js"></script>
+    <script src="~/Extends/Content/Scripts/master-slider-fw.js"></script>
+    <script src="~/Extends/Content/Plugin/jquery-circle-progress-1.2.2/dist/circle-progress.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+
+            $('.circle').circleProgress().on('circle-animation-progress', function (event, progress, step) {
+                $(this).find('strong').html(Math.round(100 * step) + '<i>%</i>');
+            });
+
+            MSfullWidth.initMSfullWidth();
+            OwlCarousel.initOwlCarousel();
+        });
+
+
+    </script>
+}

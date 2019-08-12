@@ -21,7 +21,7 @@ namespace Company.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("CetmConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -62,11 +62,5 @@ namespace Company.Models
         public DbSet<Areas.Manage.Models.Slider> Slider { get; set; }
         public DbSet<Areas.Manage.Models.SliderLanguage> SliderLanguage { get; set; }
         public DbSet<Customer> Customer { get; set; }
-        public DbSet<Areas.Manage.Models.SProduct> SProduct { get; set; }
-        public DbSet<Areas.Manage.Models.SProductLanguage> SProductLanguage { get; set; }
-        public DbSet<Areas.Manage.Models.Product> Product { get; set; }
-        public DbSet<Areas.Manage.Models.ProductLanguage> ProductLanguage { get; set; }
-        public DbSet<Areas.Manage.Models.ProductImage> ProductImage { get; set; }
-
     }
 }

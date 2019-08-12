@@ -1,0 +1,195 @@
+﻿@model Sales.Areas.Manage.Models.ProductCrud
+@using Sales.Models
+
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+
+    var db = new ApplicationDbContext();
+
+    var Categories = new List<SelectListItem>();
+
+    Categories.Add(new SelectListItem
+    {
+        Text = "-- Chọn --",
+        Value = ""
+    });
+
+    var Items = (from m in db.Category
+                 select m).Select(s => new SelectListItem
+                 {
+                     Text = s.Name,
+                     Value = s.Id.ToString()
+                 });
+
+    Categories.AddRange(Items);
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product.Name, htmlAttributes: null)
+                @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter name" } })
+                <small id="nameHelp" class="form-text text-muted">
+                    @Html.ValidationMessageFor(model => model.Product.Name, "", new { @class = "text-danger" })
+                </small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product.CategoryId, htmlAttributes: null)
+                @Html.DropDownListFor(model => model.Product.CategoryId, Categories, htmlAttributes: new { @class = "form-control" })
+                <small id="nameHelp" class="form-text text-muted">
+                    @Html.ValidationMessageFor(model => model.Product.CategoryId, "", new { @class = "text-danger" })
+                </small>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product.Price, htmlAttributes: null)
+                @Html.EditorFor(model => model.Product.Price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giá" } })
+                <small id="nameHelp" class="form-text text-muted">
+                    @Html.ValidationMessageFor(model => model.Product.Price, "", new { @class = "text-danger" })
+                </small>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product.Discount, htmlAttributes: null)
+                @Html.EditorFor(model => model.Product.Discount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giảm giá còn" } })
+                <small id="nameHelp" class="form-text text-muted">
+                    @Html.ValidationMessageFor(model => model.Product.Discount, "", new { @class = "text-danger" })
+                </small>
+            </div>
+        </div>
+       
+        <div class="col-md-1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product.Order, htmlAttributes: null)
+                @Html.EditorFor(model => model.Product.Order, new { htmlAttributes = new { @class = "form-control", @placeholder = "Thứ tự" } })
+                <small id="nameHelp" class="form-text text-muted">
+                    @Html.ValidationMessageFor(model => model.Product.Order, "", new { @class = "text-danger" })
+                </small>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product.Visible, htmlAttributes: null)
+                @Html.EditorFor(model => model.Product.Visible, new { htmlAttributes = new { @class = "form-control", @style = "margin:0 auto;" } })
+                <small id="nameHelp" class="form-text text-muted">
+                    @Html.ValidationMessageFor(model => model.Product.Visible, "", new { @class = "text-danger" })
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <input id="btn-add-image" type="button" class="form-control" value="Thêm ảnh sản phẩm" title="Thêm ảnh click vào đây" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="submit" value="Tạo" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div id="image-dynamic-add" class="row">
+        @*<div class="col-md-2 margin-bottom-10">
+            <img class="img-responsive img-thumbnail" src="http://localhost:56040/Upload/files/01.jpg" />
+            <input onclick="remove(index)" class="form-control" type="button" value="Xóa ảnh" />
+        </div>*@
+    </div>
+
+    <div id="image-hidden-data" style="display:none;">
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts{
+    <script src="~/Plugins/ckfinder/ckfinder.js"></script>
+    <script>
+        var finder = new CKFinder();
+
+        var map = new Map();
+       
+        var index = 0;
+
+        $(document).ready(function () {
+            $('#btn-add-image').on('click', function () {
+
+                finder.selectActionFunction = function (fileUrl) {
+
+                    
+                    var row = "<div id=\"col-image-" + index + "\" class=\"col-md-2 margin-bottom-10\">";
+                    row += "<img class=\"img-responsive img-thumbnail\" src=\"" + fileUrl + "\" />";
+                    row += "<input onclick=\"remove(" + index + ")\"  class=\"form-control\" type=\"button\" value=\"Xóa ảnh\">";
+                    row += "</div>";
+
+                    $('#image-dynamic-add').append(row);
+
+                    map.set(index, fileUrl);
+                    updateInput();
+
+                    index++;
+                }
+
+                finder.popup();
+
+                
+            });
+        });
+
+        function updateInput() {
+
+            var ihd = document.getElementById('image-hidden-data');
+            ihd.innerHTML = "";
+
+            var row = "";
+
+            var i = 0;
+
+            map.forEach(function (value, key) {
+                row += "<input type=\"text\" name=\"Images[" + i + "]\" value=\"" + value + "\" />";
+                i++;
+            });
+
+            ihd.innerHTML = row;
+
+        }
+
+        function remove(index) {
+            var elem = document.getElementById('col-image-' + index);
+            elem.parentElement.removeChild(elem);
+
+            console.log("del " + map.delete(index));
+            updateInput();
+
+            index--;
+        }
+
+
+        function file(buttonId, txtboxId) {
+            $('#' + buttonId).click(function () {
+                finder.selectActionFunction = function (fileUrl) {
+                    document.getElementById(txtboxId).value = fileUrl;
+                }
+                finder.popup();
+            });
+        }
+    </script>
+}
