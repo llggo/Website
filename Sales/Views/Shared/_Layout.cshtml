@@ -2,43 +2,121 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/Content/Home/vendor/bootstrap/bootstrap.min.css">
+    <!-- CSS Global Icons -->
+    <link rel="stylesheet" href="~/Content/Home/vendor/icon-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/icon-line/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/icon-etlinefont/style.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/icon-line-pro/style.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/dzsparallaxer/dzsparallaxer.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/dzsparallaxer/dzsscroller/scroller.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/dzsparallaxer/advancedscroller/plugin.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/animate.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/typedjs/typed.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="~/Content/Home/vendor/hamburgers/hamburgers.min.css">
+
+    <!-- CSS Unify -->
+    <link rel="stylesheet" href="~/Content/Home/css/unify-core.css">
+    <link rel="stylesheet" href="~/Content/Home/css/unify-components.css">
+    <link rel="stylesheet" href="~/Content/Home/css/unify-globals.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/Content/Home/css/custom.css">
+
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+<body>
+    <main>
+        <!-- Header -->
+        @Html.Partial("_Header")
+        <!-- End Header -->
+        <!-- Promo Block -->
+        @RenderBody()
+        <!-- End Call To Action -->
+        <!-- Footer -->
+        @Html.Partial("_Footer")
+        <!-- End Copyright Footer -->
+        <a class="js-go-to u-go-to-v1"
+           href="#"
+           data-type="fixed"
+           data-position='{"bottom": 15,"right": 15}'
+           data-offset-top="400"
+           data-compensation="#js-header"
+           data-show-effect="zoomIn">
+            <i class="hs-icon hs-icon-arrow-top"></i>
+        </a>
+    </main>
+
+    <div class="u-outer-spaces-helper"></div>
+
+
+    <!-- JS Global Compulsory -->
+    <script src="~/Content/Home/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/Home/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="~/Content/Home/vendor/popper.js/popper.min.js"></script>
+    <script src="~/Content/Home/vendor/bootstrap/bootstrap.min.js"></script>
+
+
+    <!-- JS Implementing Plugins -->
+    <script src="~/Content/Home/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+    <script src="~/Content/Home/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+    <script src="~/Content/Home/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+
+    <!-- JS Unify -->
+    <script src="~/Content/Home/js/hs.core.js"></script>
+    <script src="~/Content/Home/js/components/hs.header.js"></script>
+    <script src="~/Content/Home/js/helpers/hs.hamburgers.js"></script>
+    <script src="~/Content/Home/js/components/hs.tabs.js"></script>
+    <script src="~/Content/Home/js/components/hs.popup.js"></script>
+    <script src="~/Content/Home/js/components/hs.go-to.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+        $(document).on('ready', function () {
+
+            // initialization of tabs
+            $.HSCore.components.HSTabs.init('[role="tablist"]');
+
+            // initialization of go to
+            $.HSCore.components.HSGoTo.init('.js-go-to');
+        });
+
+        $(window).on('load', function () {
+            // initialization of header
+            $.HSCore.components.HSHeader.init($('#js-header'));
+            $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+            // initialization of HSMegaMenu component
+            $('.js-mega-menu').HSMegaMenu({
+                event: 'hover',
+                pageContainer: $('.container'),
+                breakpoint: 991
+            });
+        });
+
+        $(window).on('resize', function () {
+            setTimeout(function () {
+                $.HSCore.components.HSTabs.init('[role="tablist"]');
+            }, 200);
+        });</script>
+
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
