@@ -50,12 +50,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -178,6 +187,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Manage\Controllers\SettingController.cs" />
     <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
@@ -211,7 +221,10 @@
     <Content Include="Content\Home\img\1.jpg" />
     <Content Include="Content\Home\img\2.jpg" />
     <Content Include="Content\Home\img\3.png" />
+    <Content Include="Content\Home\img\4.jpg" />
     <Content Include="Content\Home\img\maps\map2.png" />
+    <Content Include="Content\Home\img\preloaders\preloader-black.svg" />
+    <Content Include="Content\Home\img\preloaders\preloader-white.svg" />
     <Content Include="Content\Home\js\.idea\misc.xml" />
     <Content Include="Content\Home\js\.idea\modules.xml" />
     <Content Include="Content\Home\js\.idea\workspace.xml" />
@@ -8070,6 +8083,7 @@
     <Content Include="Content\Home\vendor\themify-icons\fonts\themify.ttf" />
     <Content Include="Content\Home\vendor\themify-icons\fonts\themify.woff" />
     <Content Include="Content\Home\vendor\themify-icons\Themify IconFonts 5-23-2014.json" />
+    <Content Include="Areas\Manage\Views\Setting\Index.cshtml" />
     <None Include="Properties\PublishProfiles\lgohoang.somee.com FTP.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -8122,6 +8136,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Language\" />
   </ItemGroup>

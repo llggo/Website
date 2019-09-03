@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Products.
+        /// </summary>
+        internal static string home_products_title {
+            get {
+                return ResourceManager.GetString("home_products_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string home_title {
@@ -102,6 +111,15 @@ namespace Resources {
         internal static string manage_administrator_name {
             get {
                 return ResourceManager.GetString("manage_administrator_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string manage_general_setting_title {
+            get {
+                return ResourceManager.GetString("manage_general_setting_title", resourceCulture);
             }
         }
         

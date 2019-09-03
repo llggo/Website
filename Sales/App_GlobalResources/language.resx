@@ -150,4 +150,10 @@
   <data name="manage_user_login_title" xml:space="preserve">
     <value>Authentication</value>
   </data>
+  <data name="home_products_title" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="manage_general_setting_title" xml:space="preserve">
+    <value>Setting</value>
+  </data>
 </root>
